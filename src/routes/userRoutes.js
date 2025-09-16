@@ -11,6 +11,8 @@ router.get('/:id', userController.getById);
 
 router.put('/:id', userController.update);
 
+router.patch('/:id', userController.patch);
+
 router.delete('/:id', userController.delete);
 
 

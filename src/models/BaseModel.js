@@ -40,6 +40,17 @@ class BaseModel {
         return collection[index];
     }
 
+    async patch(id, updateData) {
+        const collection = db.getCollection(this.collectionName);
+        const index = collection.findIndex(item => String(item.id) === String(id));
+        if (index === -1) return null;
+
+        collection[index] = { ...collection[index], ...updateData, id };
+        db.setCollection(this.collectionName, collection);
+        await db.saveData();
+        return collection[index];
+    }
+
     async delete(id) {
         const collection = db.getCollection(this.collectionName);
         const initialLength = collection.length;

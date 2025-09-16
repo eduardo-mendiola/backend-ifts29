@@ -55,6 +55,21 @@ class BaseController {
         }
     }
 
+    // Operación PATCH (PATCH /entidad/:id)
+    patch = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const updatedItem = await this.model.patch(id, req.body);
+            if (!updatedItem) {
+                return res.status(404).json({ message: 'No encontrado para actualizar.' });
+            }
+            res.status(200).json(updatedItem);
+        } catch (error) {
+            console.error('Error al actualizar:', error.message);
+            res.status(500).json({ message: 'Error interno del servidor al actualizar.' });
+        }
+    }
+
     // Operación DELETE (DELETE /entidad/:id)
     delete = async (req, res) => {
         try {

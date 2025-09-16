@@ -74,7 +74,7 @@
       "phone": "+54 11 8765 5698",
       "role_id": 2,
       "monthly_salary": 1800,
-      "status": "active",
+      "status": "inactive",
       "created_at": "6",
       "updated_at": "2025-09-16T13:59:30.783Z"
     }
@@ -102,7 +102,7 @@
     },
     {
       "id": "5",
-      "name": "Soporte",
+      "name": "Soporte Técnico",
       "description": "Brinda asistencia técnica"
     }
   ],
@@ -168,7 +168,7 @@
       "email": "luis@mardeltech.com",
       "phone": "+54 223 123 4567",
       "address": "Mar del Plata, Argentina",
-      "status": "active"
+      "status": "inactive"
     }
   ],
   "projects": [

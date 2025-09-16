@@ -10,6 +10,8 @@ router.get('/:id', rolesController.getById);
 
 router.put('/:id', rolesController.update);
 
+router.patch('/:id', rolesController.patch);
+
 router.delete('/:id', rolesController.delete);
 
 module.exports = router;

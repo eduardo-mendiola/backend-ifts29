@@ -18,6 +18,9 @@ router.get('/:id', clientController.getById);// Ruta dinámica con parámetro `:
 // PUT /api/clients/:id - Actualizar un cliente por ID
 router.put('/:id', clientController.update);
 
+// PUT /api/clients/:id - Actualizar un cliente por ID
+router.patch('/:id', clientController.patch);
+
 // DELETE /api/clients/:id - Eliminar un cliente por ID
 router.delete('/:id', clientController.delete);
 
