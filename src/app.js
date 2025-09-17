@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json()); // Middleware para parsear cuerpos de solicitud en formato JSON
 
 // Rutas base (endpoints de la API)
-app.use('/api/clientRoutes', clientRoutes);
+app.use('/api/client', clientRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
 
