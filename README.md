@@ -26,7 +26,7 @@
    1.3 [Objetivos del Sistema](#13-objetivos-del-sistema)  
    1.4 [Arquitectura Técnica del Sistema](#14-arquitectura-técnica-del-sistema)  
 2. [Asignación de Roles y Responsabilidades](#2-asignación-de-roles-y-responsabilidades)  
-   - Eduardo E. Mendiola  
+   - [Eduardo E. Mendiola](#eduardo-e-mendiola)  
      - Rol Asignado: Arquitectura de Software y Desarrollo  
 3. [Funcionamiento del Sistema](#3-funcionamiento-del-sistema)  
    3.1 [Funcionamiento General](#31-funcionamiento-general)  
@@ -74,56 +74,122 @@ El sistema fue desarrollado con un stack **JavaScript**: Node.js como entorno de
 
 ## 2. Asignación de Roles y Responsabilidades
 
-**Eduardo E. Mendiola**  
+### **Eduardo E. Mendiola**  
 **Rol:** Arquitectura de Software y Desarrollo  
 
-**Responsabilidades principales:**
-- Diseño y definición de la arquitectura del sistema (controladores, modelos, entidades y rutas).  
-- Desarrollo del Core del Framework (BaseController y BaseModel).  
-- Gestión de persistencia de datos mediante una base de datos JSON (`JsonDatabase.js`).  
-- Implementación de entidades y modelos específicos del dominio (clientes, roles, usuarios).  
-- Configuración de rutas y middlewares de la API.  
-- Creación y configuración del servidor principal (`server.js`) y variables de entorno (.env).  
-- Creación del repositorio en GitHub y generación de documentación principal.  
+**Responsabilidades y tareas:**
+
+Las responsabilidades y las tareas realizadas en el proyecto abarcan todo el ciclo de vida del desarrollo, desde el diseño arquitectónico hasta la implementación de componentes.  
+
+### Diseño y Definición de la Arquitectura del Sistema
+- Establecimiento de una arquitectura modular y jerárquica para la aplicación, organizando el código en controladores, modelos, entidades y rutas, promoviendo la reutilización y el mantenimiento del código.
+
+### Desarrollo del Core del Framework (Base Controllers y Models)
+- **Implementación de BaseController:** Creación de la clase BaseController que encapsula las operaciones CRUD (Create, Read All, Read One by ID, Update, Patch, Delete) comunes para todas las entidades, gestionando las respuestas HTTP (status 201, 200, 404, 500, 204) y el manejo de errores centralizado.  
+- **Implementación de BaseModel:** Creación de la BaseModel que proporciona una interfaz genérica para la interacción con la base de datos subyacente (JSON), incluyendo los métodos `create`, `findAll`, `findById`, `update`, `patch` y `delete`. Esta clase utiliza un generador de IDs y el objeto db configurado.
+
+### Gestión de Persistencia de Datos (Base de Datos JSON)
+- **Creación de JsonDatabase:** Desarrollo de un sistema de base de datos basado en archivos JSON, `JsonDatabase.js`, que maneja la carga y guardado de datos de forma asíncrona en un archivo `db.json`. Este módulo también gestiona las colecciones dentro del archivo JSON.  
+- **Configuración de la Base de Datos:** Configuración de la instancia de `JsonDatabase` para ser utilizada en toda la aplicación a través de `db.js`.  
+- **Población de Datos Iniciales:** Creación y población del archivo `db.json` con datos de ejemplo para diversas colecciones como `users`, `roles`, `clients`, `projects`, `tasks`, `time_entries`, `estimates`, `invoices`, `payments`, `expenses`, `teams`, `team_members` y `documents`, estableciendo una estructura de datos para la aplicación.  
+- **Generación de IDs Únicos (IdGenerator):** Creación de la `IdGenerator` para generar IDs secuenciales y únicos para los nuevos elementos en cada colección de la base de datos.
+
+### Implementación de Entidades Específicas del Dominio
+- **Definición de Clases de Entidad:** Creación de las clases `ClientEntity`, `RoleEntity` y `UserEntity`, que modelan la estructura de datos y el comportamiento de los clientes, roles y usuarios, respectivamente, incluyendo métodos específicos como `getFullName()` o `getDisplayName()`.  
+- **Desarrollo de Modelos Específicos:** Implementación de `ClientModel`, `RoleModel` y `UserModel`, extendiendo `BaseModel` y adaptando la lógica de creación de IDs y el manejo de timestamps (para usuarios).  
+- **Desarrollo de Controladores Específicos:** Creación de `ClientController`, `RoleController` y `UserController`, extendiendo `BaseController` para manejar las operaciones específicas de cada entidad a través de la API.
+
+### Configuración de Rutas de la API
+- **Definición de Rutas Principales:** Configuración del archivo `app.js` para integrar las rutas de clientes, usuarios y roles en la API, definiendo los endpoints base `/api/client`, `/api/users` y `/api/roles`.  
+- **Creación de Archivos de Rutas Específicos:** Implementación de `clientRoutes.js`, `userRoutes.js` y `roleRoutes.js` para definir los endpoints CRUD para cada entidad, mapeando las solicitudes HTTP a los métodos de los controladores correspondientes.  
+- **Implementación de Middlewares:** Desarrollo de un middleware de validación, `validationMiddleware.js`, para asegurar la calidad de los datos de entrada, como `validateClientInput` para los clientes.
+
+### Creación y Configuración del Servidor Principal (server.js)
+- **Servidor Principal:** Creación del archivo `server.js`, el punto de arranque de la aplicación. Este archivo carga las variables de entorno, inicializa la base de datos y pone en marcha el servidor Express, escuchando las peticiones en un puerto específico.  
+- **Configuración de Puertos y Variables de Entorno (.env):** Instalación de la dependencia `dotenv` desde npm para gestionar de manera centralizada la configuración de variables de entorno. A través del archivo `.env` se definió el puerto del servidor y queda disponible para futuras variables necesarias como por ejemplo, la conexión a MongoDB. Esto permite una configuración flexible y desacopla del código. El archivo `server.js` carga y utiliza estas variables mediante la dependencia `dotenv`, garantizando una mayor portabilidad y mantenibilidad de la aplicación.
+
+### Control de Versiones y Documentación
+- **Creación del Repositorio en GitHub:** Gestión de la inicialización y configuración del repositorio de control de versiones en GitHub para el proyecto, facilitando la colaboración y el seguimiento de los cambios.  
+- **Capturas de consultas:** capturas de pantalla de las peticiones realizadas con la herramienta Postman en Visual Studio Code, a la API RESTful para demostrar su funcionamiento y validar las operaciones CRUD.
+- **Generación de la documentación:** Elaboración de un documento en Google Docs como base principal de la documentación del proyecto, adaptado a los requisitos de entrega del trabajo práctico y posteriormente exportado en formato PDF. Este documento incluye la asignación de roles, las fuentes consultadas y el enlace al video explicativo del proyecto.  
+- **Creación del archivo README:** Adaptación del contenido del documento principal al archivo `README.md`, que funcionará como documentación de referencia dentro del repositorio. Este archivo resume la información esencial sobre el funcionamiento, instalación y uso de la aplicación.
+
 
 ---
 
 ## 3. Funcionamiento del Sistema
 
-El sistema funciona como una **API RESTful** construida sobre Express.js, diseñada para gestionar proyectos, clientes y tiempo. Su punto de entrada es `server.js`, que se encarga de:
+La aplicación es una API RESTful construida sobre Express.js que permite gestionar un sistema de proyectos, clientes y tiempo. Su diseño modular facilita la escalabilidad y el mantenimiento.
 
-1. Cargar variables de entorno desde `.env`.  
-2. Inicializar la base de datos JSON (`db.initialize()`).  
-3. Importar y ejecutar la aplicación Express (`app.js`) en el puerto configurado.
+### 3.1. Funcionamiento General
+El sistema opera como un servidor web que escucha peticiones HTTP. Cuando recibe una petición, la procesa a través de una serie de capas (rutas, middlewares, controladores, modelos) hasta interactuar con una base de datos JSON para almacenar y recuperar información. Las respuestas se envían en formato JSON.  
 
-### 3.1 Funcionamiento General
-El sistema opera como un servidor web que procesa peticiones HTTP a través de capas (rutas, middlewares, controladores, modelos) e interactúa con una base de datos JSON. Las respuestas se envían en formato JSON.
+El punto de entrada de la aplicación es **server.js**. Este archivo es responsable de:
+- Cargar las variables de entorno del archivo `.env` utilizando la librería `dotenv`.  
+  Por ejemplo, define el puerto en el que el servidor escuchará las peticiones, como `PORT = 4000`.
+- Inicializar la base de datos (`db.initialize()`) antes de arrancar el servidor.
+- Importar la instancia de la aplicación Express (`app.js`) y ponerla a escuchar en el puerto configurado, mostrando un mensaje en la consola:  
+  `Servidor de ClickWave corriendo en http://localhost:${PORT}`
 
-### 3.2 Funcionalidades y Módulos Principales
-- **Servidor Principal (`server.js`)**: arranque de la aplicación y carga de configuración.  
-- **Variables de Entorno y dotenv**: gestión centralizada de configuración sensible.  
-- **Servidor Express (`app.js`)**: configuración de middlewares y rutas principales.  
-- **Base de Datos JSON (`JsonDatabase.js`, `db.js`)**: persistencia de datos en `db.json`.  
-- **Generador de IDs (`IdGenerator.js`)**: creación de IDs únicos secuenciales.  
-- **Entidades (`Entity.js`)**: definición de estructura y métodos de objetos de negocio.  
-- **Modelos (`BaseModel.js`, modelos específicos)**: operaciones CRUD y lógica específica de cada entidad.  
-- **Controladores (`BaseController.js`, controladores específicos)**: manejo de peticiones HTTP y respuestas.  
-- **Rutas (`Routes.js`)**: definición de endpoints de la API y asociación con controladores.  
-- **Middlewares (`validationMiddleware.js`)**: validación de datos de entrada antes de ejecutar controladores.
+### 3.2. Funcionalidades y Módulos Principales
 
-### 3.3 Interacción entre Módulos
-1. `server.js` arranca el servidor y asegura que la base de datos y variables de entorno estén listas.  
-2. Una petición HTTP llega al servidor Express.  
-3. `app.js` dirige la petición a la ruta correspondiente.  
-4. Middleware de validación verifica los datos de la petición.  
-5. El controlador ejecuta la operación correspondiente en el modelo asociado.  
-6. El modelo interactúa con la base de datos JSON y genera el resultado.  
-7. El controlador construye la respuesta HTTP en formato JSON.
+#### Servidor Principal (server.js)
+- Es el punto de arranque de la aplicación.  
+- Carga la configuración del entorno desde `.env` usando `dotenv`.  
+- Inicializa la base de datos JSON antes de que la aplicación comience a recibir solicitudes.  
+- Inicia la instancia de la aplicación Express (`app`) y la hace escuchar en el puerto especificado (por defecto 4000 si se carga desde `.env.txt`).  
+
+#### Variables de Entorno (.env) y dotenv
+- El archivo `.env` almacena variables de configuración que son sensibles o que pueden cambiar entre diferentes entornos (desarrollo, producción), como el número de `PORT` y accesos a bases de datos como MongoDB.  
+- La librería `dotenv` se utiliza en `server.js` para cargar estas variables en `process.env`, haciéndolas accesibles en toda la aplicación. Esto permite una configuración flexible sin codificar valores directamente en el código fuente.  
+
+#### Servidor Express (app.js)
+- Es la aplicación principal de Express, importada por `server.js`.  
+- Configura middlewares globales, como `express.json()`, para parsear cuerpos de solicitud JSON.  
+- Monta las rutas específicas de cada entidad (clientes, usuarios, roles) bajo sus respectivos prefijos (`/api/clientRoutes`, `/api/users`, `/api/roles`).  
+- Define una ruta de bienvenida y un manejador de errores 404 para rutas no encontradas.  
+
+#### Base de Datos JSON (JsonDatabase.js, db.js)
+- `JsonDatabase.js` gestiona la persistencia de datos. Carga y guarda la información en un archivo `db.json`.  
+- Proporciona métodos para `getCollection(name)` y `setCollection(name, data)` para interactuar con las diferentes colecciones (e.g., "users", "clients") dentro del archivo JSON.  
+- `db.js` es la instancia centralizada de `JsonDatabase` utilizada por los modelos.  
+
+#### Generador de IDs (IdGenerator.js)
+- Se encarga de crear IDs secuenciales únicos para cada nueva entrada en una colección específica, basándose en el último ID existente en esa colección.  
+
+#### Entidades (Entity.js)
+- Definen la estructura y los atributos de los objetos de negocio (e.g., `ClientEntity`, `RoleEntity`, `UserEntity`).  
+- Pueden incluir métodos específicos de negocio (e.g., `getFullName()` en `ClientEntity` y `UserEntity`, `getDisplayName()` en `RoleEntity`).  
+
+#### Modelos (Model.js, BaseModel.js)
+- **BaseModel.js:** Proporciona las operaciones CRUD genéricas que interactúan directamente con `JsonDatabase`. Incluye métodos para `create`, `findAll`, `findById`, `update`, `patch` y `delete`. Utiliza el `IdGenerator` para la asignación de IDs.  
+- **Modelos Específicos (e.g., ClientModel.js, RoleModel.js, UserModel.js):** Extienden `BaseModel` para gestionar datos de una entidad particular. Pueden sobrescribir o añadir lógica específica, como la inyección de IDs generados o la actualización de timestamps en los métodos `create` y `update`.  
+
+#### Controladores (Controller.js, BaseController.js)
+- **BaseController.js:** Contiene la lógica para manejar las peticiones HTTP y las respuestas, envolviendo las operaciones CRUD del `BaseModel` con manejo de errores y códigos de estado HTTP apropiados.  
+- **Controladores Específicos (e.g., ClientController.js, RoleController.js, UserController.js):** Extienden `BaseController` para exponer las operaciones CRUD para cada entidad a través de la API.  
+
+#### Rutas (Routes.js)
+- Definen los endpoints de la API y asocian las peticiones HTTP (`POST`, `GET`, `PUT`, `PATCH`, `DELETE`) con los métodos correspondientes en los controladores.  
+- Pueden integrar middlewares de validación antes de que la petición llegue al controlador, como `validateClientInput` en `clientRoutes.js`.  
+
+#### Middlewares (validationMiddleware.js)
+- Contienen funciones que se ejecutan antes de los controladores para realizar validaciones sobre los datos de entrada de las peticiones.  
+- Por ejemplo, `validateClientInput` verifica la presencia de campos obligatorios para un cliente.  
+
+### 3.3. Interacción entre Módulos
+- El archivo `server.js` arranca el servidor Express y asegura que la base de datos esté inicializada y las variables de entorno cargadas.  
+- Una petición HTTP (e.g., `POST /api/clients`) llega al servidor Express configurado en `app.js` (que es iniciado por `server.js`).  
+- `app.js` dirige la petición a la ruta correspondiente (e.g., `clientRoutes.js`).  
+- La ruta puede aplicar un middleware de validación (e.g., `validateClientInput`) para verificar los datos de la petición.  
+- Si la validación es exitosa, la petición se pasa al método del controlador (e.g., `clientController.create`) asociado a esa ruta y verbo HTTP.  
+- El método del controlador (que extiende `BaseController`) invoca la operación correspondiente en su modelo asociado (e.g., `ClientModel.create`).  
+- El modelo (que extiende `BaseModel`) utiliza la instancia de `JsonDatabase` (`db`) para interactuar con el archivo `db.json`, realizando la operación de lectura o escritura de datos. Si es una operación de creación, el `IdGenerator` se utiliza para asignar un ID único.  
+- El resultado de la operación se devuelve desde el modelo al controlador.  
+- Finalmente, el controlador construye una respuesta HTTP (con un código de estado y datos en formato JSON) y la envía de vuelta al cliente.  
+
 
 ---
-¡Hola\! Claro, con gusto te ayudo a convertir ese texto a formato Markdown para tu archivo `README.md`. Es genial que estés documentando tu API, es una práctica excelente para cualquier programador.
-
------
 
 ### 4\. Capturas de Consultas
 
@@ -414,16 +480,27 @@ Respuesta recibida:
 
 ## 5. Uso de IAs
 
-Durante el desarrollo se utilizaron herramientas de IA para mejorar la eficiencia:
+### 5.1 Modelos  
 
-### 5.1 Modelos
-- ChatGPT (GPT-5 mini, OpenAI)  
-- Claude AI (Claude Opus 4.1, Anthropic)  
+Durante el desarrollo de este proyecto se emplearon herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia en la codificación, la comprensión teórica y la elaboración de documentación. Específicamente, se utilizó el modelo **ChatGPT (GPT-5 mini, proporcionado por OpenAI)** en su versión en la nube, así como el modelo **Claude AI (Claude Opus 4.1, proporcionado por Anthropic)** en su versión en la nube.  
 
-### 5.2 Funciones principales
-- Corrección de código en JavaScript y Node.js.  
-- Explicaciones teóricas sobre arquitectura y metodologías.  
-- Generación de documentación y redacción de secciones formales.
+El uso de la IA incluyó las siguientes funciones principales:  
+- **Corrección de código:** revisión de sintaxis, detección de errores lógicos y sugerencias de optimización en JavaScript, incluyendo Node.js, Express.js y dependencias como dotenv y nodemon.  
+- **Explicaciones teóricas:** consultas sobre funcionamiento de conceptos de programación, arquitectura de software y metodologías de desarrollo.  
+- **Generación de documentación:** asistencia en la redacción de secciones formales del proyecto, incluyendo guías, introducciones, análisis de caso.  
+
+---
+
+### 5.2 Prompts  
+
+**AI y Modelo:**  
+**Prompt:**  
+**Respuesta:**  
+
+**AI y Modelo:**  
+**Prompt:**  
+**Respuesta:**  
+
 
 ---
 
