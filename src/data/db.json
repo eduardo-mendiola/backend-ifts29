@@ -160,6 +160,15 @@
       "phone": "+54 9 223 636 588",
       "address": "Mar del Plata, Argentina",
       "status": "active"
+    },
+    {
+      "id": "7",
+      "name": "MardelTech",
+      "contact_name": "Luis Garcia",
+      "email": "luisgarcia@mardeltech.com",
+      "phone": "+54 223 333 5899",
+      "address": "Mar del Plata, Argentina",
+      "status": "active"
     }
   ],
   "projects": [

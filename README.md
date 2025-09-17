@@ -32,10 +32,13 @@
    3.1 [Funcionamiento General](#31-funcionamiento-general)  
    3.2 [Funcionalidades y Módulos Principales](#32-funcionalidades-y-módulos-principales)  
    3.3 [Interacción entre Módulos](#33-interacción-entre-módulos)  
-4. [Uso de IAs](#4-uso-de-ias)  
-   4.1 [Modelos](#41-modelos)  
-   4.2 [Prompts](#42-prompts)  
-5. [Bibliografía y Fuentes](#5-bibliografía-y-fuentes)
+4. [Capturas de Consultas](#4-capturas-de-consultas)  
+   4.1 [Ejecución del Servidor](#41-ejecución-del-servidor)  
+   4.2 [Ejemplo de Consulta - CRUD: Cliente](#42-ejemplo-de-consulta---crud-cliente)
+5. [Uso de IAs](#5-uso-de-ias)  
+   5.1 [Modelos](#51-modelos)  
+   5.2 [Prompts](#52-prompts)  
+6. [Bibliografía y Fuentes](#6-bibliografía-y-fuentes)
 
 ---
 
@@ -118,23 +121,313 @@ El sistema opera como un servidor web que procesa peticiones HTTP a través de c
 7. El controlador construye la respuesta HTTP en formato JSON.
 
 ---
+¡Hola\! Claro, con gusto te ayudo a convertir ese texto a formato Markdown para tu archivo `README.md`. Es genial que estés documentando tu API, es una práctica excelente para cualquier programador.
 
-## 4. Uso de IAs
+-----
+
+### 4\. Capturas de Consultas
+
+Se incluyen capturas de pantalla de las peticiones realizadas con la herramienta Postman en Visual Studio Code, a la API RESTful para demostrar su funcionamiento y validar las operaciones CRUD.
+
+Postman permite enviar solicitudes HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) y visualizar respuestas en formato JSON. En este caso, se documenta la gestión de clientes.
+
+-----
+
+### 4.1 Ejecución del Servidor
+
+Antes de realizar cualquier consulta, se ejecuta el servidor de la API para que esté disponible para recibir solicitudes.
+
+Comando ejecutado:
+
+```bash
+npm run dev
+```
+
+Resultado esperado:
+
+```
+Mensaje en consola indicando que el servidor está corriendo, por ejemplo:
+Servidor de ClickWave corriendo en http://localhost:4000
+```
+![4.1 - Servidor corriendo](./assets/screenshots/4.1-server-running.png)
+
+-----
+
+### 4.2 Ejemplo de Consulta - CRUD: Cliente
+
+#### 1\. Crear un cliente (`POST /api/clients`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/clients`
+  - **Método**: `POST`
+  - **Cuerpo (JSON)**:
+
+<!-- end list -->
+
+```json
+{
+   "name": "MardelTech",
+   "contact_name": "Luis Pérez",
+   "email": "luis@mardeltech.com",
+   "phone": "+54 223 123 4567",
+   "address": "Mar del Plata, Argentina",
+   "status": "active"
+}
+```
+
+Respuesta recibida:
+
+  - **Código HTTP**: `201`
+  - **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+   "id": "7",
+   "name": "MardelTech",
+   "contact_name": "Luis Pérez",
+   "email": "luis@mardeltech.com",
+   "phone": "+54 223 123 4567",
+   "address": "Mar del Plata, Argentina",
+   "status": "active"
+}
+```
+
+![4.2.1 - Crear cliente](./assets/screenshots/4.2.1-create-client.png)
+
+-----
+
+#### 2\. Obtener todos los clientes (`GET /api/clients`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/clients`
+  - **Método**: `GET`
+  - **Cuerpo de la solicitud**: No aplica (`GET` no envía cuerpo)
+
+Respuesta recibida:
+
+  - **Código HTTP**: `200`
+  - **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+[
+   {
+      "id": "1",
+      "name": "TechCorp",
+      "contact_name": "Laura Pérez",
+      "email": "laura@techcorp.com",
+      "phone": "+34 91 123 4567",
+      "address": "Madrid, España",
+      "status": "active"
+   },
+   {
+      "id": "2",
+      "name": "InnovaSoft",
+      "contact_name": "José Ramírez",
+      "email": "jose@innovasoft.com",
+      "phone": "+52 55 9988 7766",
+      "address": "CDMX, México",
+      "status": "active"
+   },
+   {
+      "id": "3",
+      "name": "HealthPlus",
+      "contact_name": "Andrea Torres",
+      "email": "andrea@healthplus.com",
+      "phone": "+54 11 6677 8899",
+      "address": "Buenos Aires, Argentina",
+      "status": "inactive"
+   },
+   {
+      "id": "4",
+      "name": "EduPro",
+      "contact_name": "Sofía Morales",
+      "email": "sofia@edupro.com",
+      "phone": "+1 202 555 0147",
+      "address": "Miami, USA",
+      "status": "active"
+   },
+   {
+      "id": "5",
+      "name": "GreenEnergy",
+      "contact_name": "Pablo Vega",
+      "email": "pablo@greenenergy.com",
+      "phone": "+49 30 1122 3344",
+      "address": "Berlín, Alemania",
+      "status": "active"
+   },
+   {
+      "id": "6",
+      "name": "IngeMar",
+      "contact_name": "Martina Gonzales",
+      "email": "martinagonzales@ingemar.com",
+      "phone": "+54 9 223 636 588",
+      "address": "Mar del Plata, Argentina",
+      "status": "active"
+   },
+   {
+      "id": "7",
+      "name": "MardelTech",
+      "contact_name": "Luis Pérez",
+      "email": "luis@mardeltech.com",
+      "phone": "+54 223 123 4567",
+      "address": "Mar del Plata, Argentina",
+      "status": "active"
+   }
+]
+```
+![4.2.2 - Obtener todos los clientes](./assets/screenshots/4.2.2-get-all-clients.png)
+-----
+
+#### 3\. Obtener un cliente por ID (`GET /api/clients/:id`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/clients/7`
+  - **Método**: `GET`
+  - **Cuerpo de la solicitud**: No aplica (`GET` no envía cuerpo)
+
+Respuesta recibida:
+
+  - **Código HTTP**: `200`
+  - **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+   "id": "7",
+   "name": "MardelTech",
+   "contact_name": "Luis Pérez",
+   "email": "luis@mardeltech.com",
+   "phone": "+54 223 123 4567",
+   "address": "Mar del Plata, Argentina",
+   "status": "active"
+}
+```
+
+![4.2.3 - Obtener cliente por ID](./assets/screenshots/4.2.3-get-client-by-id.png)
+
+-----
+
+#### 4\. Actualizar datos de un cliente por ID (`PUT /api/clients/:id`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/clients/7`
+  - **Método**: `PUT`
+  - **Cuerpo (JSON)**:
+
+<!-- end list -->
+
+```json
+{
+   "name": "MardelTech",
+   "contact_name": "Luis Garcia",
+   "email": "luisgarcia@mardeltech.com",
+   "phone": "+54 223 123 4567",
+   "address": "Mar del Plata, Argentina",
+   "status": "inactive"
+}
+```
+
+Respuesta recibida:
+
+  - **Código HTTP**: `200`
+  - **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+   "id": "7",
+   "name": "MardelTech",
+   "contact_name": "Luis Garcia",
+   "email": "luisgarcia@mardeltech.com",
+   "phone": "+54 223 123 4567",
+   "address": "Mar del Plata, Argentina",
+   "status": "inactive"
+}
+```
+![4.2.4 - Actualizar cliente (PUT)](./assets/screenshots/4.2.4-put-client.png)
+-----
+
+#### 5\. Actualizar campos específicos de un cliente (`PATCH /api/clients/:id`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/clients/7`
+  - **Método**: `PATCH`
+  - **Cuerpo (JSON)**:
+
+<!-- end list -->
+
+```json
+{
+   "phone":"+54 223 333 5899",
+   "status": "active"
+}
+```
+
+Respuesta recibida:
+
+  - **Código HTTP**: `200`
+  - **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+   "id": "7",
+   "name": "MardelTech",
+   "contact_name": "Luis Garcia",
+   "email": "luisgarcia@mardeltech.com",
+   "phone": "+54 223 333 5899",
+   "address": "Mar del Plata, Argentina",
+   "status": "active"
+}
+```
+![4.2.5 - Actualizar cliente (PATCH)](./assets/screenshots/4.2.5-patch-client.png)
+
+-----
+
+#### 6\. Eliminar un cliente por ID (`DELETE /api/clients/:id`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/clients/1`
+  - **Método**: `DELETE`
+  - **Cuerpo de la solicitud**: No aplica (`DELETE` no envía cuerpo)
+
+Respuesta recibida:
+
+  - **Código HTTP**: `204` (No Content)
+
+![4.2.6 - Eliminar cliente](./assets/screenshots/4.2.6-delete-client.png)
+
+---
+
+## 5. Uso de IAs
 
 Durante el desarrollo se utilizaron herramientas de IA para mejorar la eficiencia:
 
-### 4.1 Modelos
+### 5.1 Modelos
 - ChatGPT (GPT-5 mini, OpenAI)  
 - Claude AI (Claude Opus 4.1, Anthropic)  
 
-### 4.2 Funciones principales
+### 5.2 Funciones principales
 - Corrección de código en JavaScript y Node.js.  
 - Explicaciones teóricas sobre arquitectura y metodologías.  
 - Generación de documentación y redacción de secciones formales.
 
 ---
 
-## 5. Bibliografía y Fuentes
+## 6. Bibliografía y Fuentes
 
 - IFTS Nro. 29, Tecnicatura Superior en Desarrollo de Software a Distancia, Desarrollo de Sistemas Web (Back End) - 2° (2025). [Enlace](https://aulasvirtuales.bue.edu.ar/course/view.php?id=22553)  
 - The Net Ninja. MERN Stack Crash Course Tutorial [Playlist]. YouTube. 2022. [Enlace](https://youtube.com/playlist?list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&si=TEi7PZTW6xPRlSSk)  
