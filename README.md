@@ -493,9 +493,34 @@ El uso de la IA incluyó las siguientes funciones principales:
 
 ### 5.2 Prompts  
 
-**AI y Modelo:**  
+**AI:** ChatGPT
+**Modelo:** GPT-5 Mini  
 **Prompt:**  
+Genera un JSON de ejemplo para un sistema de gestión de proyectos que incluya datos realistas para cada entidad. Las entidades son:
+1. users: id(string), nombre, apellido, email, hash de contraseña, teléfono, role_id, salario mensual, estado, fecha de creación y actualización.
+2. roles: id(string), nombre, descripción.
+3. clients: id(string), nombre, persona de contacto, email, teléfono, dirección, estado.
+4. projects: id(string), client_id, nombre, descripción, fecha de inicio y fin, presupuesto, tipo de facturación, estado, manager_id.
+5. tasks: id(string), project_id, assigned_to (user_id), título, descripción, prioridad, estado, horas estimadas, fecha de entrega.
+6. time_entries: id(string), user_id, task_id, project_id, fecha, horas trabajadas, descripción, facturable.
+7. estimates: id(string), client_id, project_id, título, descripción, monto total, estado, fecha de validez.
+8. invoices: id(string), client_id, estimate_id, número de factura, fecha de emisión, fecha de vencimiento, monto total, estado.
+9. payments: id(string), invoice_id, monto, fecha de pago, método de pago, id de transacción.
+10. expenses: id(string), project_id, user_id, descripción, monto, fecha, categoría.
+11. teams: id(string), nombre, descripción.
+12. team_members: id(string), team_id, user_id, rol dentro del equipo.
+13. documents: id(string), project_id, uploaded_by (user_id), título, url del archivo, tipo de archivo, fecha de subida.
+
+Asegúrate de:
+- Usar nombres, emails y direcciones realistas.
+- Incluir al menos 5-6 registros por entidad.
+- Generar relaciones coherentes entre entidades (`foreign keys`).
+- Diferenciar estados (`active`, `inactive`, `pending`, `in_progress`, etc.).
+- Usar fechas consistentes en el año 2025.
+
 **Respuesta:**  
+
+[Link al archivo db.json](https://github.com/eduardo-mendiola/backend-ifts29/blob/main/src/data/db.json)
 
 **AI y Modelo:**  
 **Prompt:**  
