@@ -1,6 +1,46 @@
 class BaseController {
-    constructor(model) {
+    constructor(model, viewPath) {
         this.model = model; // Modelo asociado a la entidad
+        this.viewPath = viewPath;     // Ruta base de las vistas, ej: 'client'
+    }
+
+    // Método para obtener todos los clientes para la vista Pug
+    getAllView = async (req, res) => {
+        try {
+            const items = await this.model.findAll();
+            res.render(`${this.viewPath}/list`, {
+                title: `Lista de ${this.viewPath}`,
+                items
+            });
+        } catch (error) {
+            console.error(`Error al obtener todos en vista (${this.viewPath}):`, error.message);
+            res.status(500).send('Error interno del servidor al obtener datos.');
+        }
+    }
+
+    getByIdView = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const item = await this.model.findById(id);
+            if (!item) {
+                return res.status(404).send(`${this.viewPath} no encontrado.`);
+            }
+
+            if (req.originalUrl.includes('/edit')) {
+                res.render(`${this.viewPath}/form`, {
+                    title: `Editar ${this.viewPath}`,
+                    item
+                });
+            } else {
+                res.render(`${this.viewPath}/details`, {
+                    title: `Detalles del ${this.viewPath}`,
+                    item
+                });
+            }
+        } catch (error) {
+            console.error(`Error al obtener por ID en vista (${this.viewPath}):`, error.message);
+            res.status(500).send('Error interno del servidor al obtener datos.');
+        }
     }
 
     // Operación CREATE (POST /entidad)

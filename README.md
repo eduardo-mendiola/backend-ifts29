@@ -21,8 +21,9 @@
 1. [Introducción del Caso](#introducción-del-caso)  
    1.1 [Propósito del Sistema](#11-propósito-del-sistema)  
    1.2 [Contexto Empresarial](#12-contexto-empresarial)  
-       - 2.1 [Descripción General de ClickWave](#121-descripción-general-de-clickwave)  
-       - 2.2 [Problemáticas Detectadas](#122-problemáticas-detectadas)  
+      - 1.2.1 [Descripción General de ClickWave](#121-descripción-general-de-clickwave)  
+      - 1.2.2 [Problemáticas Detectadas](#122-problemáticas-detectadas)
+            
    1.3 [Objetivos del Sistema](#13-objetivos-del-sistema)  
    1.4 [Arquitectura Técnica del Sistema](#14-arquitectura-técnica-del-sistema)  
 2. [Asignación de Roles y Responsabilidades](#2-asignación-de-roles-y-responsabilidades)  

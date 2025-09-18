@@ -1,6 +1,7 @@
 const express = require('express');
-
+const path = require('path');
 // Importar rutas de cada entidad
+const ClientController = require('./controllers/ClientController')
 const clientRoutes = require('./routes/clientRoutes');
 const userRoutes = require('./routes/userRoutes');
 const roleRoutes = require('./routes/roleRoutes');
@@ -9,21 +10,37 @@ const roleRoutes = require('./routes/roleRoutes');
 // Inicialización y configuración básica
 const app = express();
 
+// Configuración de Pug como motor de vistas
+app.set('views', path.join(__dirname,'..', 'views'));
+app.set('view engine', 'pug')
+
 // Middlewares
 app.use(express.json()); // Middleware para parsear cuerpos de solicitud en formato JSON
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')))
+
+
+// Rutas para las vistas del CRUD (HTML)
+
+// Ruta de bienvenida 
+app.get('/', (req, res) => {
+    // res.json({ 
+    //     title: 'Bienvenido a la API de ClickWave', 
+    //     message: 'Gestiona tus proyectos, clientes y tiempo.' 
+    // });
+    res.render('index', { title: 'ClickWave' });
+});
+
+app.get('/clients', ClientController.getAllView);
+app.get('/clients/:id', ClientController.getByIdView);
+// app.get('/clients/new', (req, res) => res.render('client-form', { title: 'Nuevo Cliente', client: {} }));
+// app.get('/clients/:id/edit', ClientController.getByIdView);
 
 // Rutas base (endpoints de la API)
 app.use('/api/client', clientRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
-
-// Ruta de bienvenida 
-app.get('/', (req, res) => {
-    res.json({ 
-        title: 'Bienvenido a la API de ClickWave', 
-        message: 'Gestiona tus proyectos, clientes y tiempo.' 
-    });
-});
 
 // Manejo de errores 404 para rutas no encontradas
 app.use((req, res, next) => {

@@ -3,7 +3,7 @@ const Client = require('../models/ClientModel');
 
 class ClientController extends BaseController {
     constructor() {
-        super(Client); 
+        super(Client, 'client'); 
     }
 
 

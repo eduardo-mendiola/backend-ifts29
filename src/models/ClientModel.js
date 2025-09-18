@@ -8,7 +8,7 @@ const clientIdGen = new IdGenerator(db, 'clients');
 
 class ClientModel extends BaseModel {
     constructor() {
-        super('clients', ClientEntity); 
+        super('clients', ClientEntity, 'client'); 
         this.idGen = clientIdGen;       
     }
 
