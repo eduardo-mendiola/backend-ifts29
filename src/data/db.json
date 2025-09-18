@@ -1,4 +1,22 @@
 {
+  "areas": [
+    {
+      "id": "1",
+      "name_area": "SEO/SEM"
+    },
+    {
+      "id": "2",
+      "name_area": "Social Media"
+    },
+    {
+      "id": "3",
+      "name_area": "Contenidos"
+    },
+    {
+      "id": "4",
+      "name_area": "Administración"
+    }
+  ],
   "users": [
     {
       "id": "1",
@@ -8,6 +26,7 @@
       "password_hash": "hash123",
       "phone": "+54 11 1234 5678",
       "role_id": 1,
+      "area_id": 1,
       "monthly_salary": 2500,
       "status": "active",
       "created_at": "2025-01-10",
@@ -21,6 +40,7 @@
       "password_hash": "hash456",
       "phone": "+54 11 8765 4321",
       "role_id": 2,
+      "area_id": 2,
       "monthly_salary": 1500,
       "status": "active",
       "created_at": "2025-01-12",
@@ -34,6 +54,7 @@
       "password_hash": "hash789",
       "phone": "+54 11 2233 4455",
       "role_id": 3,
+      "area_id": 3,
       "monthly_salary": 2500,
       "status": "inactive",
       "created_at": "2025-01-15",
@@ -47,6 +68,7 @@
       "password_hash": "hash101",
       "phone": "+54 11 9988 7766",
       "role_id": 2,
+      "area_id": 1,
       "monthly_salary": 4000,
       "status": "active",
       "created_at": "2025-01-20",
@@ -60,6 +82,7 @@
       "password_hash": "hash202",
       "phone": "+54 11 5544 3322",
       "role_id": 1,
+      "area_id": 2,
       "monthly_salary": 3500,
       "status": "active",
       "created_at": "2025-01-25",
@@ -73,6 +96,7 @@
       "password_hast": "hash126",
       "phone": "+54 11 8765 5698",
       "role_id": 2,
+      "area_id": 4,
       "monthly_salary": 1800,
       "status": "active",
       "created_at": "6",
@@ -102,6 +126,11 @@
     },
     {
       "id": "5",
+      "name": "Supervisor",
+      "description": "Brinda asistencia técnica"
+    },
+    {
+      "id": "6",
       "name": "Soporte Técnico",
       "description": "Brinda asistencia técnica"
     }

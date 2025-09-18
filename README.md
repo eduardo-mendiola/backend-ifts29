@@ -97,7 +97,7 @@ Las responsabilidades y las tareas realizadas en el proyecto abarcan todo el cic
 - **Creacioón de diagramas:** Modelado de la base de datos del sistema mediante un **Diagrama de Entidad-Relación (DER)** en SQL, incluyendo todas las entidades, atributos y relaciones principales. Este diagrama sirvió para generar las tablas y claves foráneas en MySQL, definiendo la estructura relacional de la base de datos. Posteriormente, se planifica adaptar este modelo a **MongoDB**, utilizando referencias o documentos embebidos según convenga para la persistencia en formato JSON.
 - **Creación de JsonDatabase:** Desarrollo de un sistema de base de datos basado en archivos JSON, `JsonDatabase.js`, que maneja la carga y guardado de datos de forma asíncrona en un archivo `db.json`. Este módulo también gestiona las colecciones dentro del archivo JSON.  
 - **Configuración de la Base de Datos:** Configuración de la instancia de `JsonDatabase` para ser utilizada en toda la aplicación a través de `db.js`.  
-- **Población de Datos Iniciales:** Creación y población del archivo `db.json` con datos de ejemplo para diversas colecciones como `users`, `roles`, `clients`, `projects`, `tasks`, `time_entries`, `estimates`, `invoices`, `payments`, `expenses`, `teams`, `team_members` y `documents`, estableciendo una estructura de datos para la aplicación.  
+- **Población de Datos Iniciales:** Creación y población del archivo `db.json` con datos de ejemplo para diversas colecciones como `users`, `areas`, `roles`, `clients`, `projects`, `tasks`, `time_entries`, `estimates`, `invoices`, `payments`, `expenses`, `teams`, `team_members` y `documents`, estableciendo una estructura de datos para la aplicación.  
 - **Generación de IDs Únicos (IdGenerator):** Creación de la `IdGenerator` para generar IDs secuenciales y únicos para los nuevos elementos en cada colección de la base de datos.
 
 ### Implementación de Entidades Específicas del Dominio
@@ -205,66 +205,70 @@ El sistema ha sido diseñado como una API RESTful que gestiona proyectos, client
 #### 3.4.1. Entidades y su contexto:
 
 1. **users (Usuarios)**  
-   **Descripción de la Entidad:** Esta colección almacena información detallada sobre el personal de ClickWave. Incluye atributos como id, first_name, last_name, email, phone, password_hash, role_id (para vincular con su rol en la empresa), monthly_salary, status, y created_at/updated_at para control temporal.  
+   **Descripción de la Entidad:** Esta colección almacena información detallada sobre el personal de ClickWave. Incluye atributos como id, first_name, last_name, email, phone, password_hash, area_id (para vincular con un área de la empresa), role_id (para vincular con su rol en la empresa), monthly_salary, status, y created_at/updated_at para control temporal.  
    **Relación con el Sistema:** El UserEntity define la estructura de un usuario. El UserModel extiende BaseModel para manejar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) específicas para usuarios, incluyendo la generación de IDs y la actualización automática de created_at y updated_at. El UserController extiende BaseController para exponer estos servicios a través de la API.  
    **Relación con ClickWave:** Es fundamental para la "Formalización de Roles" y la "Evaluación del Desempeño del Equipo". ClickWave actualmente sufre de "procesos informales y roles poco definidos". La entidad users permite asignar un role_id específico a cada empleado (por ejemplo, "Administrador", "Gerente de Proyecto", "Consultor"), lo que es crucial para establecer responsabilidades claras. El registro de usuarios es la base para el seguimiento del tiempo y la evaluación objetiva del rendimiento del equipo. La inclusión de monthly_salary y status soporta los objetivos financieros de "Optimizar Costos y Eficiencia Operativa".
 
-2. **roles (Roles)**  
+2. **areas (Áreas)**
+   **Descripción de la Entidad:** Contiene los diferentes áreas a la que puede pertenecer un usuario dentro de ClickWave, con atributos como id y name_area Relación con el Sistema: El AreaEntity define la forma de un área. El AreaModel extiende BaseModel y el AreaController extiende BaseController, proporcionando la funcionalidad CRUD para gestionar las áreas.
+   **Relación con ClickWave:** Directamente vinculado con la necesidad de "formalización de áreas". Las áreas como “SEO/SEM”, “Social Media”, “Contenidos” y “Administración”."Administrador" reflejan la estructura funcional de la empresa y su evolución organizativa. 
+
+3. **roles (Roles)**  
    **Descripción de la Entidad:** Contiene los diferentes roles que pueden desempeñar los usuarios dentro de ClickWave, con atributos como id, name y description.  
    **Relación con el Sistema:** El RoleEntity define la forma de un rol. El RoleModel extiende BaseModel y el RoleController extiende BaseController, proporcionando la funcionalidad CRUD para gestionar los roles.  
    **Relación con ClickWave:** Directamente vinculado con la necesidad de "formalización de roles". Los roles como "Administrador", "Gerente de Proyecto" y "Consultor" reflejan la estructura funcional de la empresa y su evolución organizativa. Al definir roles claros, se aborda la "ausencia de roles claramente definidos" en los procesos actuales de ClickWave.
 
-3. **clients (Clientes)**  
+4. **clients (Clientes)**  
    **Descripción de la Entidad:** Almacena la información de las empresas y contactos con los que trabaja ClickWave. Los atributos incluyen id, name (nombre de la empresa), contact_name (nombre de la persona de contacto), email, phone, address y status.  
    **Relación con el Sistema:** El ClientEntity modela la estructura de los datos del cliente. El ClientModel gestiona la persistencia, y el ClientController maneja las peticiones de la API. Un middleware (validateClientInput) asegura que los datos mínimos para un cliente sean proporcionados antes de ser procesados.  
    **Relación con ClickWave:** Esencial para el "Mercado Objetivo" de ClickWave (PyMEs) y para su misión de "acompañar a cada cliente con un servicio cercano y transparente". La gestión centralizada de clientes es la base para los "Procesos de Gestión de Proyectos y Facturación". Una base de datos de clientes bien organizada ayuda a reducir los "conflictos con clientes" que surgen de una facturación no justificada, promoviendo la "transparencia".
 
-4. **projects (Proyectos)**  
+5. **projects (Proyectos)**  
    **Descripción de la Entidad:** Representa los proyectos que ClickWave realiza para sus clientes. Contiene id, client_id (vinculado a un cliente), name, description, start_date, end_date, budget, billing_type (tipo de facturación, por ejemplo, "fixed" o "hourly"), status y manager_id (vinculado a un usuario).  
    **Relación con el Sistema:** Esta entidad establecerá relaciones clave con clients y users.  
    **Relación con ClickWave:** Es la entidad central para el "Proceso de Gestión de Proyectos" y una "necesidad de gestión (software)" clave. Permite a ClickWave "planificar, ejecutar y monitorear proyectos, incluyendo hitos, plazos y recursos". Los atributos budget y billing_type son críticos para superar la "falta de un registro detallado de las horas reales trabajadas" y el análisis de rentabilidad. El manager_id facilita la asignación de responsables y la "Formalización de Roles", que es una propuesta de mejora.
 
-5. **tasks (Tareas)**  
+6. **tasks (Tareas)**  
    **Descripción de la Entidad:** Desglosa los proyectos en unidades de trabajo más pequeñas. Incluye id, project_id (vinculado a un proyecto), assigned_to (ID del usuario asignado), title, description, priority, status, estimated_hours y due_date.  
    **Relación con el Sistema:** Relaciona projects con users.  
    **Relación con ClickWave:** Es un componente vital para la "Adopción de Metodología Ágil" y la "Implementación de un Sistema de Gestión de Proyectos y Tiempo". Permite la "asignación de tareas específicas" y el "registro de horas y tareas" por consultores, abordando la "asignación de tareas informal" y la "falta de un registro detallado de las horas trabajadas". Facilita la "trazabilidad y medición", esencial para el seguimiento del progreso.
 
-6. **time_entries (Registros de Tiempo)**  
+7. **time_entries (Registros de Tiempo)**  
    **Descripción de la Entidad:** Registra el tiempo real invertido por los usuarios en tareas específicas de los proyectos. Atributos: id, user_id, task_id, project_id, date, hours_worked, description y billable (indicando si esas horas son facturables al cliente).  
    **Relación con el Sistema:** Es una entidad de relación directa entre users, tasks y projects.  
    **Relación con ClickWave:** Esta es una de las entidades más críticas para solucionar los "puntos débiles" de ClickWave. Resuelve directamente la "falta de un registro detallado de las horas reales trabajadas" y los "conflictos con clientes" por la facturación. Será la "fuente de datos para la contabilidad y gestión". El campo billable es crucial para "Aumentar la Rentabilidad por Proyecto y Servicio" y "Optimizar Costos y Eficiencia Operativa", al permitir una facturación "transparente y justificada" basada en el trabajo real.
 
-7. **estimates (Presupuestos)**  
+8. **estimates (Presupuestos)**  
    **Descripción de la Entidad:** Almacena los presupuestos o propuestas de servicio ofrecidas a los clientes. Contiene id, client_id, project_id, title, description, total_amount, status y valid_until.  
    **Relación con el Sistema:** Relaciona clients con projects.  
    **Relación con ClickWave:** Forma parte del "Proceso de Facturación y Control Financiero". Ayuda a formalizar la comunicación financiera con los clientes antes de la facturación, lo que es vital para una "facturación transparente y justificada" y reducir futuras disputas.
 
-8. **invoices (Facturas)**  
+9. **invoices (Facturas)**  
    **Descripción de la Entidad:** Representa las facturas emitidas por los servicios prestados. Incluye id, client_id, estimate_id (vinculado al presupuesto original), invoice_number, issue_date, due_date, total_amount y status.  
    **Relación con el Sistema:** Vincula clients con estimates.  
    **Relación con ClickWave:** Es una salida clave del "Proceso de Facturación y Control Financiero". La digitalización y centralización de las facturas contribuye a la "integridad de la información y su oportunidad" y a "Mejorar el Flujo de Caja y la Cobranza" al tener un registro claro de lo que se ha facturado y su estado.
 
-9. **payments (Pagos)**  
+10. **payments (Pagos)**  
    **Descripción de la Entidad:** Registra los pagos recibidos de los clientes por las facturas emitidas. Atributos: id, invoice_id (vinculado a una factura), amount, payment_date, payment_method y transaction_id.  
    **Relación con el Sistema:** Relaciona directamente con invoices.  
    **Relación con ClickWave:** Fundamental para el "Proceso de Facturación y Control Financiero" y el objetivo de "Mejorar el Flujo de Caja y la Cobranza". Permite un seguimiento preciso de los ingresos y la conciliación de cuentas, lo cual es vital para la salud financiera y la toma de decisiones.
 
-10. **expenses (Gastos)**  
+11. **expenses (Gastos)**  
     **Descripción de la Entidad:** Almacena los gastos incurridos por la empresa, potencialmente asociados a proyectos o usuarios. Incluye id, project_id, user_id, description, amount, date y category.  
     **Relación con el Sistema:** Relaciona projects con users.  
     **Relación con ClickWave:** Esencial para "Optimizar Costos y Eficiencia Operativa" y para el "análisis ágil de la rentabilidad por servicio". Un registro detallado de gastos permite a ClickWave identificar ineficiencias y asignar recursos de manera más efectiva, apoyando la toma de decisiones basada en datos válidos.
 
-11. **teams (Equipos)**  
+12. **teams (Equipos)**  
     **Descripción de la Entidad:** Define los diferentes equipos de trabajo dentro de ClickWave. Atributos: id, name y description.  
     **Relación con el Sistema:** Relaciona con team_members.  
     **Relación con ClickWave:** Contribuye a la "Formalización de Roles" y a la organización de los "equipos de consultores". Permite estructurar la empresa en áreas (como "Backend Team", "Frontend Team", "QA Team"), facilitando una "mayor profesionalización" y la "colaboración".
 
-12. **team_members (Miembros del Equipo)**  
+13. **team_members (Miembros del Equipo)**  
     **Descripción de la Entidad:** Enlaza a los usuarios con los equipos a los que pertenecen. Incluye id, team_id y user_id, además del role_in_team (el rol específico de ese usuario dentro de ese equipo).  
     **Relación con el Sistema:** Es una tabla de relación entre teams y users.  
     **Relación con ClickWave:** Complementa la "Formalización de Roles" al definir la composición y el papel de cada individuo dentro de los equipos. Esto es crucial para la "organización interna" de ClickWave que actualmente "conserva procesos informales y roles poco definidos".
 
-13. **documents (Documentos)**  
+14. **documents (Documentos)**  
     **Descripción de la Entidad:** Permite la gestión de documentos relacionados con proyectos. Atributos: id, project_id, uploaded_by (el usuario que subió el documento), title, file_url, file_type y uploaded_at.  
     **Relación con el Sistema:** Relaciona projects con users.  
     **Relación con ClickWave:** Aborda la necesidad de "Documentación Propuesta" y la "digitalización y centralización de esta información en un sistema". La capacidad de adjuntar y organizar documentos (contratos, requisitos, wireframes) mejora la "excelencia en la gestión de proyectos" y la integridad de la información, que son aspectos clave para la maduración y expansión de ClickWave.

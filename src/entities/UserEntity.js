@@ -7,6 +7,7 @@ class UserEntity {
         password_hast,
         phone,
         role_id,
+        area_id,
         monthly_salary,
         status,
         created_at = new Date().toISOString(),
@@ -19,6 +20,7 @@ class UserEntity {
         this.password_hast = password_hast;
         this.phone = phone;
         this.role_id = role_id;
+        this.area_id = area_id;
         this.monthly_salary = monthly_salary;
         this.status = status;
         this.created_at = created_at;
