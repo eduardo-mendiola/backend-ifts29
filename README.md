@@ -701,3 +701,5 @@ Asegúrate de:
 - Node.js Foundation. Node.js. Recuperado en septiembre de 2025. [Enlace](https://node.js.org/)  
 - npm, Inc. Documentación de npm. Recuperado en septiembre de 2025. [Enlace](https://docs.npmjs.com/)  
 - Express.js. Documentación oficial de Express.js. Recuperado en septiembre de 2025. [Enlace](https://expressjs.com/)
+- Pug Documentación oficial de plantillas Pug. Recuperado en septiembre de 2025. [Enlace]https://pugjs.org/api/getting-started.html
+- Bootstrap Documentación oficial de Bootstrap v5.3. Recuperado en septiembre de 2025. [Enlace]https://getbootstrap.com/docs/5.3/getting-started/introduction/
