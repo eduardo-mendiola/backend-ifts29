@@ -5,10 +5,9 @@ class RoleEntity {
         this.description = description;
     }
 
-  
     getDisplayName() {
         return `${this.name}: ${this.description}`;
     }
 }
 
-module.exports = RoleEntity;
+export default RoleEntity;

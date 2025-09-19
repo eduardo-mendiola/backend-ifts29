@@ -1,5 +1,5 @@
-const BaseController = require("./BaseController");
-const User = require('../models/UserModel');
+import BaseController from './BaseController.js';
+import User from '../models/UserModel.js';
 
 class UserController extends BaseController {
     constructor() {
@@ -7,4 +7,5 @@ class UserController extends BaseController {
     }
 }
 
-module.exports = new UserController();
+export default new UserController();
+

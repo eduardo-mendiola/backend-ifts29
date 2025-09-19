@@ -1,9 +1,13 @@
-const fs = require('fs').promises;
-const path = require('path');
+import fs from 'fs/promises';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class JsonDatabase {
     constructor(fileName = 'db.json') {
-        this.filePath = path.join(__dirname, '..', 'data', fileName);
+        this.filePath = join(__dirname, '..', 'data', fileName);
         this.data = {};
         this.initialized = false;
     }
@@ -45,4 +49,4 @@ class JsonDatabase {
     }
 }
 
-module.exports = JsonDatabase;
+export default JsonDatabase;

@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const rolesController = require('../controllers/RoleController');
+
+import rolesController from '../controllers/RoleController.js';
 
 router.post('/', rolesController.create);
 
@@ -14,4 +15,4 @@ router.patch('/:id', rolesController.patch);
 
 router.delete('/:id', rolesController.delete);
 
-module.exports = router;
+export default router;

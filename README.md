@@ -1,7 +1,7 @@
 # Tecnicatura Superior en Desarrollo de Software
 ## **1° Entrega de Proyecto Parcial<br>API RESTful CRUD <br>Caso 2: ClickWave**
 
-**Materia:** Web Systems Development (Back End)  
+**Materia:** Desarrollo de Sistemas Web (Back End)  
 **Profesor:** Emir Eliezer Garcia Ontiveros  
 **Comisión:** A  
 
@@ -14,6 +14,12 @@
 
 **Fecha:** 17-09-2025  
 
+---
+**Para ejecutarlo:**
+1. Clonar el repositorio
+2. Instalar dependencias con `npm install`
+3. Crear archivo `.env` con tus variables
+4. Ejecutar con `npm run dev` o `npm start`
 ---
 
 ## Índice
@@ -36,15 +42,24 @@
    3.4 [Modelo de Datos y Entidades del Sistema](#34-modelo-de-datos-y-entidades-del-sistema)
    - 3.4.1 [Entidades y su contexto](#341-entidades-y-su-contexto)
    - 3.4.2 [Diagrama DER](#342-diagrama-der)
-4. [Capturas de Consultas](#4-capturas-de-consultas)  
-   4.1 [Ejecución del Servidor](#41-ejecución-del-servidor)  
-   4.2 [Ejemplo de Consulta - CRUD: Cliente](#42-ejemplo-de-consulta---crud-cliente)
-5. [Uso de IAs](#5-uso-de-ias)  
-   5.1 [Modelos](#51-modelos)  
-   5.2 [Prompts](#52-prompts)  
-6. [Bibliografía y Fuentes](#6-bibliografía-y-fuentes)
+4. [Cómo ejecutar este proyecto](#4-cómo-ejecutar-este-proyecto)  
+   4.1 [Clonar el repositorio:](#41-clonar-el-repositorio)  
+   4.2 [Instalar las dependencias](#42-instalar-las-dependencias)      
+   4.3 [Ejecutar la aplicación](#43-ejecutar-la-aplicación)   
+   4.4 [Abrir la aplicación en el navegador](#44-abrir-la-aplicación-en-el-navegador)   
+   4.5 [Variables de entorno](#45-variables-de-entorno)   
+5. [Capturas de Consultas](#5-capturas-de-consultas)  
+   5.1 [Ejecución del Servidor](#51-ejecución-del-servidor)  
+   5.2 [Ejemplo de Consulta - CRUD: Cliente](#52-ejemplo-de-consulta---crud-cliente)
+6. [Uso de IAs](#6-uso-de-ias)  
+   6.1 [Modelos](#61-modelos)  
+   6.2 [Prompts](#62-prompts)  
+7. [Bibliografía y Fuentes](#7-bibliografía-y-fuentes)
 
 ---
+
+<br/>
+
 
 ## Introducción del Caso
 
@@ -278,8 +293,64 @@ El sistema ha sido diseñado como una API RESTful que gestiona proyectos, client
 ![3.4.2 - Diagrama DER](./assets/screenshots/3.4.2-der.png)
 
 ---
+## 4. Cómo ejecutar este proyecto
 
-### 4\. Capturas de Consultas
+Este proyecto es una aplicación en **Node.js** y **Express**. Para ejecutarlo localmente, sigue estos pasos:
+
+### 4.1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/tu_usuario/primer_entrega_crud.git
+cd primer_entrega_crud
+````
+
+### 4.2. Instalar las dependencias:
+
+```bash
+npm install
+```
+
+Esto instalará todas las dependencias necesarias que están listadas en `package.json`.
+
+### 4.3. Ejecutar la aplicación:
+
+* Para desarrollo (se reinicia automáticamente al modificar archivos):
+
+```bash
+npm run dev
+```
+
+* Para producción:
+
+```bash
+npm start
+```
+
+### 4.4 Abrir la aplicación en el navegador:
+
+El servidor se ejecutará en el puerto definido en tu archivo `.env`.  
+Si no has definido un puerto, por defecto será `http://localhost:3000`.
+
+
+### 4.5 Variables de entorno
+
+Este proyecto utiliza variables de entorno para configurar ciertos parámetros (por ejemplo, puerto del servidor, credenciales, etc.).  
+
+1. Crea un archivo llamado `.env` en la raíz del proyecto.
+2. Agrega tus variables de entorno siguiendo este formato:
+
+```
+
+PORT=3000
+DB\_USER=usuario
+DB\_PASS=contraseña
+OTRA\_VARIABLE=valor
+
+```
+
+3. Guarda el archivo. Ahora la aplicación podrá acceder a estas variables mediante `process.env` en Node.js.
+
+### 5. Capturas de Consultas
 
 Se incluyen capturas de pantalla de las peticiones realizadas con la herramienta Postman en Visual Studio Code, a la API RESTful para demostrar su funcionamiento y validar las operaciones CRUD.
 
@@ -287,7 +358,7 @@ Postman permite enviar solicitudes HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`
 
 -----
 
-### 4.1 Ejecución del Servidor
+### 5.1 Ejecución del Servidor
 
 Antes de realizar cualquier consulta, se ejecuta el servidor de la API para que esté disponible para recibir solicitudes.
 
@@ -303,11 +374,11 @@ Resultado esperado:
 Mensaje en consola indicando que el servidor está corriendo, por ejemplo:
 Servidor de ClickWave corriendo en http://localhost:4000
 ```
-![4.1 - Servidor corriendo](./assets/screenshots/4.1-server-running.png)
+![5.1 - Servidor corriendo](./assets/screenshots/5.1-server-running.png)
 
 -----
 
-### 4.2 Ejemplo de Consulta - CRUD: Cliente
+### 5.2 Ejemplo de Consulta - CRUD: Cliente
 
 #### 1\. Crear un cliente (`POST /api/clients`)
 
@@ -349,7 +420,7 @@ Respuesta recibida:
 }
 ```
 
-![4.2.1 - Crear cliente](./assets/screenshots/4.2.1-create-client.png)
+![5.2.1 - Crear cliente](./assets/screenshots/5.2.1-create-client.png)
 
 -----
 
@@ -435,7 +506,7 @@ Respuesta recibida:
    }
 ]
 ```
-![4.2.2 - Obtener todos los clientes](./assets/screenshots/4.2.2-get-all-clients.png)
+![5.2.2 - Obtener todos los clientes](./assets/screenshots/5.2.2-get-all-clients.png)
 -----
 
 #### 3\. Obtener un cliente por ID (`GET /api/clients/:id`)
@@ -465,7 +536,7 @@ Respuesta recibida:
 }
 ```
 
-![4.2.3 - Obtener cliente por ID](./assets/screenshots/4.2.3-get-client-by-id.png)
+![5.2.3 - Obtener cliente por ID](./assets/screenshots/5.2.3-get-client-by-id.png)
 
 -----
 
@@ -508,7 +579,7 @@ Respuesta recibida:
    "status": "inactive"
 }
 ```
-![4.2.4 - Actualizar cliente (PUT)](./assets/screenshots/4.2.4-put-client.png)
+![5.2.4 - Actualizar cliente (PUT)](./assets/screenshots/5.2.4-put-client.png)
 -----
 
 #### 5\. Actualizar campos específicos de un cliente (`PATCH /api/clients/:id`)
@@ -546,7 +617,7 @@ Respuesta recibida:
    "status": "active"
 }
 ```
-![4.2.5 - Actualizar cliente (PATCH)](./assets/screenshots/4.2.5-patch-client.png)
+![5.2.5 - Actualizar cliente (PATCH)](./assets/screenshots/5.2.5-patch-client.png)
 
 -----
 
@@ -562,13 +633,13 @@ Respuesta recibida:
 
   - **Código HTTP**: `204` (No Content)
 
-![4.2.6 - Eliminar cliente](./assets/screenshots/4.2.6-delete-client.png)
+![5.2.6 - Eliminar cliente](./assets/screenshots/5.2.6-delete-client.png)
 
 ---
 
-## 5. Uso de IAs
+## 6. Uso de IAs
 
-### 5.1 Modelos  
+### 6.1 Modelos  
 
 Durante el desarrollo de este proyecto se emplearon herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia en la codificación, la comprensión teórica y la elaboración de documentación. Específicamente, se utilizó el modelo **ChatGPT (GPT-5 mini, proporcionado por OpenAI)** en su versión en la nube, así como el modelo **Claude AI (Claude Opus 4.1, proporcionado por Anthropic)** en su versión en la nube.  
 
@@ -579,7 +650,7 @@ El uso de la IA incluyó las siguientes funciones principales:
 
 ---
 
-### 5.2 Prompts  
+### 6.2 Prompts  
 
 **AI:** ChatGPT
 **Modelo:** GPT-5 Mini  
@@ -587,6 +658,7 @@ El uso de la IA incluyó las siguientes funciones principales:
 Genera un JSON de ejemplo para un sistema de gestión de proyectos que incluya datos realistas para cada entidad. Las entidades son:
 1. users: id(string), nombre, apellido, email, hash de contraseña, teléfono, role_id, salario mensual, estado, fecha de creación y actualización.
 2. roles: id(string), nombre, descripción.
+2. areas: id(string), name_area.
 3. clients: id(string), nombre, persona de contacto, email, teléfono, dirección, estado.
 4. projects: id(string), client_id, nombre, descripción, fecha de inicio y fin, presupuesto, tipo de facturación, estado, manager_id.
 5. tasks: id(string), project_id, assigned_to (user_id), título, descripción, prioridad, estado, horas estimadas, fecha de entrega.
@@ -617,7 +689,7 @@ Asegúrate de:
 
 ---
 
-## 6. Bibliografía y Fuentes
+## 7. Bibliografía y Fuentes
 
 - IFTS Nro. 29, Tecnicatura Superior en Desarrollo de Software a Distancia, Desarrollo de Sistemas Web (Back End) - 2° (2025). [Enlace](https://aulasvirtuales.bue.edu.ar/course/view.php?id=22553)  
 - The Net Ninja. MERN Stack Crash Course Tutorial [Playlist]. YouTube. 2022. [Enlace](https://youtube.com/playlist?list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&si=TEi7PZTW6xPRlSSk)  

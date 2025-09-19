@@ -1,17 +1,20 @@
-const BaseModel = require('./BaseModel');
-const RoleEntity = require('../entities/RoleEntity');
-const IdGenerator = require('../utils/IdGenerator');
-const db = require('../config/db');
+import BaseModel from './BaseModel.js';
+import RoleEntity from '../entities/RoleEntity.js';
+import IdGenerator from '../utils/IdGenerator.js';
+import db from '../config/db.js';
 
 const roleIdGen = new IdGenerator(db, 'roles');
 
 class RoleModel extends BaseModel {
     constructor() {
-        super('roles', RoleEntity); 
+        super(
+            'roles',
+            RoleEntity,
+            ['id', 'name', 'description'] 
+        );
         this.idGen = roleIdGen;
     }
 
-    // Sobrescribir create para usar ID generado
     async create(data) {
         data.id = this.idGen.generateId();
         return super.create(data);  
@@ -22,5 +25,4 @@ class RoleModel extends BaseModel {
     }
 }
 
-
-module.exports = new RoleModel();
+export default new RoleModel();

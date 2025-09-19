@@ -14,4 +14,4 @@ class IdGenerator {
     }
 }
 
-module.exports = IdGenerator;
+export default IdGenerator;

@@ -4,7 +4,7 @@ class UserEntity {
         first_name,
         last_name,
         email,
-        password_hast,
+        password_hash,
         phone,
         role_id,
         area_id,
@@ -17,7 +17,7 @@ class UserEntity {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.password_hast = password_hast;
+        this.password_hash = password_hash;
         this.phone = phone;
         this.role_id = role_id;
         this.area_id = area_id;
@@ -33,4 +33,4 @@ class UserEntity {
     }
 }
 
-module.exports = UserEntity;
+export default UserEntity;

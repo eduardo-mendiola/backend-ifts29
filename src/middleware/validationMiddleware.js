@@ -7,8 +7,7 @@ const validateClientInput = (req, res, next) => {
     next(); 
 };
 
-
-module.exports = {
+export {
     validateClientInput,
     // validateUserInput,
     // validateRoleInput,

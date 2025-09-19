@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const userController = require('../controllers/UserController');
+
+import userController from '../controllers/UserController.js';
 // const { validateUserInput } = require('../middleware/validationMiddleware');
 
 router.post('/', userController.create);
@@ -15,5 +16,4 @@ router.patch('/:id', userController.patch);
 
 router.delete('/:id', userController.delete);
 
-
-module.exports = router
+export default router;

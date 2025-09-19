@@ -1,4 +1,4 @@
-const JsonDatabase = require('../utils/JsonDatabase');
+import JsonDatabase from '../utils/JsonDatabase.js';
 const db = new JsonDatabase();  
 
-module.exports = db;
+export default db;

@@ -1,12 +1,10 @@
-const BaseController = require('./BaseController');
-const Client = require('../models/ClientModel'); 
+import BaseController from './BaseController.js';
+import Client from '../models/ClientModel.js'; 
 
 class ClientController extends BaseController {
     constructor() {
         super(Client, 'client'); 
     }
-
-
 }
 
-module.exports = new ClientController();
+export default new ClientController();

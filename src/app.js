@@ -1,25 +1,28 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 // Importar rutas de cada entidad
-const ClientController = require('./controllers/ClientController')
-const clientRoutes = require('./routes/clientRoutes');
-const userRoutes = require('./routes/userRoutes');
-const roleRoutes = require('./routes/roleRoutes');
+import ClientController from './controllers/ClientController.js';
+import clientRoutes from './routes/clientRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import roleRoutes from './routes/roleRoutes.js';
 
+// __dirname en ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Inicialización y configuración básica
 const app = express();
 
 // Configuración de Pug como motor de vistas
-app.set('views', path.join(__dirname,'..', 'views'));
+app.set('views', join(__dirname,'..', 'views'));
 app.set('view engine', 'pug')
 
 // Middlewares
 app.use(express.json()); // Middleware para parsear cuerpos de solicitud en formato JSON
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')))
-
+app.use(express.static(join(__dirname, 'public')))
 
 // Rutas para las vistas del CRUD (HTML)
 
@@ -51,4 +54,4 @@ app.use((req, res, next) => {
 });
 
 // Exportar la instancia de la aplicación
-module.exports = app;
+export default app;

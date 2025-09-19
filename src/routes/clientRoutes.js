@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 // Definir las rutas relativas
 const router = express.Router(); 
-const clientController = require('../controllers/ClientController');
+import clientController from '../controllers/ClientController.js';
 // Importar middleware de validación
-const { validateClientInput } = require('../middleware/validationMiddleware'); 
+import { validateClientInput } from '../middleware/validationMiddleware.js'; 
 
 // Rutas CRUD para Clientes
 // POST /api/clients - Crear un nuevo cliente
@@ -24,4 +24,4 @@ router.patch('/:id', clientController.patch);
 // DELETE /api/clients/:id - Eliminar un cliente por ID
 router.delete('/:id', clientController.delete);
 
-module.exports = router;
+export default router;

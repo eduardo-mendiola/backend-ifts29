@@ -91,16 +91,16 @@
     {
       "id": "6",
       "first_name": "Francisco",
-      "last_name": "Zabala",
-      "email": "francisco.zabala@clickwave.com",
-      "password_hast": "hash126",
+      "last_name": "Gimenez",
+      "email": "francisco.gimenez@clickwave.com",
+      "password_hash": "hash126",
       "phone": "+54 11 8765 5698",
-      "role_id": 2,
-      "area_id": 4,
+      "role_id": 3,
+      "area_id": 1,
       "monthly_salary": 1800,
       "status": "active",
-      "created_at": "6",
-      "updated_at": "2025-09-16T17:10:26.446Z"
+      "created_at": "2025-09-19T00:23:26.829Z",
+      "updated_at": "2025-09-19T00:23:37.347Z"
     }
   ],
   "roles": [
@@ -187,15 +187,6 @@
       "contact_name": "Martina Gonzales",
       "email": "martinagonzales@ingemar.com",
       "phone": "+54 9 223 636 588",
-      "address": "Mar del Plata, Argentina",
-      "status": "active"
-    },
-    {
-      "id": "7",
-      "name": "MardelTech",
-      "contact_name": "Luis Garcia",
-      "email": "luisgarcia@mardeltech.com",
-      "phone": "+54 223 333 5899",
       "address": "Mar del Plata, Argentina",
       "status": "active"
     }

@@ -1,5 +1,5 @@
-const BaseController = require("./BaseController");
-const Role = require('../models/RoleModel');
+import BaseController from './BaseController.js';
+import Role from '../models/RoleModel.js';
 
 class RoleController extends BaseController {
     constructor() {
@@ -7,4 +7,4 @@ class RoleController extends BaseController {
     }
 }
 
-module.exports = new RoleController();
+export default new RoleController();

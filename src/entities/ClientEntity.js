@@ -14,4 +14,4 @@ class ClientEntity {
     }
 }
 
-module.exports = ClientEntity;
+export default ClientEntity;
