@@ -3,7 +3,7 @@ import User from '../models/UserModel.js';
 
 class UserController extends BaseController {
     constructor() {
-        super(User);
+        super(User, 'user');
     }
 }
 

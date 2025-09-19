@@ -7,6 +7,9 @@ class BaseController {
     // Método para obtener todos los clientes para la vista Pug
     getAllView = async (req, res) => {
         try {
+            // para simular el error 500 y probar error500.pug
+            //throw new Error("Simulated server error");
+
             const items = await this.model.findAll();
             res.render(`${this.viewPath}/list`, {
                 title: `Lista de ${this.viewPath}`,
@@ -14,16 +17,18 @@ class BaseController {
             });
         } catch (error) {
             console.error(`Error al obtener todos en vista (${this.viewPath}):`, error.message);
-            res.status(500).send('Error interno del servidor al obtener datos.');
+            // res.status(500).send('Error interno del servidor al obtener datos.');
+            res.render('error500', { tittle: 'Error de servidor'});
         }
     }
-
+    // Método para obtener los detalles de un cliente para la vista Pug
     getByIdView = async (req, res) => {
         try {
             const { id } = req.params;
             const item = await this.model.findById(id);
             if (!item) {
-                return res.status(404).send(`${this.viewPath} no encontrado.`);
+                // return res.status(404).send(`${this.viewPath} no encontrado.`);
+                res.render('error404', { title: `${this.viewPath} no encontrado.`});
             }
 
             if (req.originalUrl.includes('/edit')) {
@@ -39,7 +44,8 @@ class BaseController {
             }
         } catch (error) {
             console.error(`Error al obtener por ID en vista (${this.viewPath}):`, error.message);
-            res.status(500).send('Error interno del servidor al obtener datos.');
+            //res.status(500).send('Error interno del servidor al obtener datos.');
+            res.render('error500', { tittle: 'Error de servidor'});
         }
     }
 

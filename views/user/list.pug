@@ -1,0 +1,24 @@
+extends ../layout.pug
+
+block content
+  h1.mb-4 Lista de Usuarios del Sistema
+
+  table.table.table-hover.table-dark
+    thead
+      tr
+        th ID
+        th Nombre
+        th Apellido
+        th.text-end.pe-5 Acciones
+    tbody
+      each item in items
+        tr
+          td= item.id
+          td= item.first_name
+          td= item.last_name
+          td.text-end
+            a.btn.btn-gray.btn-sm.me-2(href=`/users/${item.id}`) Ver
+            a.btn.btn-gray.btn-sm.me-2(href=`/users/${item.id}/edit`) Editar
+            form(action=`/api/users/${item.id}?_method=DELETE`, method="POST", style="display:inline;")
+              input(type="hidden", name="_method", value="DELETE")
+              button.btn.btn-danger-soft.btn-sm(type="submit") Eliminar
