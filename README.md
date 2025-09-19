@@ -130,7 +130,7 @@ Las responsabilidades y las tareas realizadas en el proyecto abarcan todo el cic
 - **Configuración de Puertos y Variables de Entorno (.env):** Instalación de la dependencia `dotenv` desde npm para gestionar de manera centralizada la configuración de variables de entorno. A través del archivo `.env` se definió el puerto del servidor y queda disponible para futuras variables necesarias como por ejemplo, la conexión a MongoDB. Esto permite una configuración flexible y desacopla del código. El archivo `server.js` carga y utiliza estas variables mediante la dependencia `dotenv`, garantizando una mayor portabilidad y mantenibilidad de la aplicación.
 
 ### User Interface / Views:
-- **Creación de Plantillas Pug y Lógica de Vistas:** Desarrollo de las vistas de la aplicación utilizando Pug como motor de plantillas, incluyendo la página de inicio (layout.pug e index.pug), plantillas de manejo de errores (error500.pug y error404.pug), y las vistas específicas para clientes (list.pug, details.pug).  
+- **Creación de Plantillas Pug y Lógica de Vistas:** Desarrollo de las vistas de la aplicación utilizando Pug como motor de plantillas, incluyendo la página de inicio (layout.pug e index.pug), plantillas de manejo de errores (error500.pug y error404.pug), y las vistas específicas para clientes (list.pug, details.pug) y para usuarios (list.pug y details.pug).  
 - **Implementación de lógica** en los controladores para renderizar estas vistas con los datos provenientes de los modelos, manteniendo los métodos genéricos de BaseController y adaptándolos para permitir la renderización dinámica de cualquier entidad. Se aplicó Bootstrap con tema oscuro y estilos para botones, tablas y navegación.
 
 ### Actualizaciones y refactorización de código: 
