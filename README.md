@@ -7,7 +7,7 @@
 
 **Grupo 2:**  
 - Mendiola, Eduardo E.  
-- Integrante 2  
+- Moreno, Miriam
 - Integrante 3  
 - Integrante 4  
 - Integrante 5  
