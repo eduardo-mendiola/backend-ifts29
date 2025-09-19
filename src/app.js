@@ -6,6 +6,9 @@ import ClientController from './controllers/ClientController.js';
 import clientRoutes from './routes/clientRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import roleRoutes from './routes/roleRoutes.js';
+import ProjectController from './controllers/ProjectController.js';
+import projectRoutes from './routes/projectRoutes.js';
+
 
 // __dirname en ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -39,11 +42,15 @@ app.get('/clients', ClientController.getAllView);
 app.get('/clients/:id', ClientController.getByIdView);
 // app.get('/clients/new', (req, res) => res.render('client-form', { title: 'Nuevo Cliente', client: {} }));
 // app.get('/clients/:id/edit', ClientController.getByIdView);
+app.get('/projects', ProjectController.getAllView);
+app.get('/projects/:id', ProjectController.getByIdView);
 
 // Rutas base (endpoints de la API)
 app.use('/api/client', clientRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
+app.use('/api/project', projectRoutes);
+
 
 // Manejo de errores 404 para rutas no encontradas
 app.use((req, res, next) => {
