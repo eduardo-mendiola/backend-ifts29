@@ -6,6 +6,7 @@ import clientController from '../controllers/ClientController.js';
 import { validateClientInput } from '../middleware/validationMiddleware.js'; 
 
 // Rutas CRUD para Clientes
+router.get('/client-form', clientController.newView);         // Nuevo cliente
 // POST /api/clients - Crear un nuevo cliente
 router.post('/', validateClientInput, clientController.create); // Middleware de validación antes del controlador
 
