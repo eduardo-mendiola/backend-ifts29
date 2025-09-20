@@ -21,7 +21,7 @@ class BaseController {
             res.render('error500', { tittle: 'Error de servidor'});
         }
     }
-    // Método para obtener los detalles de un cliente para la vista Pug
+
     getByIdView = async (req, res) => {
         try {
             const { id } = req.params;
@@ -51,15 +51,18 @@ class BaseController {
 
     // Operación CREATE (POST /entidad)
     create = async (req, res) => {
-        try {
-            const newItem = await this.model.create(req.body);
-            res.status(201).json(newItem);
-        } catch (error) {
-            console.error('Error al crear:', error.message);
-            res.status(500).json({ message: 'Error interno del servidor al crear.' });
-        }
-    }
+    try {
+        // Guarda el cliente en la base de datos usando tu modelo
+        const newItem = await this.model.create(req.body);
 
+        // Redirige a la lista de clientes después de crear
+        res.redirect('/clients');
+    } catch (error) {
+        console.error('Error al crear:', error.message);
+        // Si hay un error, renderiza una página de error
+        res.status(500).render('error500', { title: 'Error de servidor' });
+    }
+}
     // Operación READ ALL (GET /entidad)
     getAll = async (req, res) => {
         try {
@@ -115,7 +118,17 @@ class BaseController {
             res.status(500).json({ message: 'Error interno del servidor al actualizar.' });
         }
     }
-
+newView = async (req, res) => {
+  try {
+    res.render(`${this.viewPath}/client-form`, {
+      title: `Nuevo ${this.viewPath}`,
+      item: {} // objeto vacío para crear un nuevo cliente
+    });
+  } catch (error) {
+    console.error(`Error al abrir formulario (${this.viewPath}):`, error.message);
+    res.status(500).render('error500', { title: 'Error de servidor' });
+  }
+}
     // Operación DELETE (DELETE /entidad/:id)
     delete = async (req, res) => {
         try {
