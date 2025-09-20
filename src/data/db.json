@@ -189,6 +189,15 @@
       "phone": "+54 9 223 636 588",
       "address": "Mar del Plata, Argentina",
       "status": "active"
+    },
+    {
+      "id": "7",
+      "name": "Tecnosoft",
+      "contact_name": "Ulises Vascos",
+      "email": "ulises268@tecnosoft.com",
+      "phone": "+51177555",
+      "address": "Polonia ",
+      "status": "Inactive"
     }
   ],
   "projects": [
