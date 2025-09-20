@@ -49,8 +49,19 @@ class BaseController {
         }
     }
 
+    // Para API (Postman, Thunder Client)
+create = async (req, res) => {
+  try {
+    const newItem = await this.model.create(req.body);
+    res.status(201).json(newItem);
+  } catch (error) {
+    console.error('Error al crear (API):', error.message);
+    res.status(500).json({ message: 'Error interno del servidor al crear.' });
+  }
+}
+
     // Operación CREATE (POST /entidad)
-    create = async (req, res) => {
+    createView = async (req, res) => {
     try {
         // Guarda el cliente en la base de datos usando tu modelo
         const newItem = await this.model.create(req.body);

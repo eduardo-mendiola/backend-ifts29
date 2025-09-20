@@ -3,22 +3,22 @@ extends ../layout.pug
 block content
   h1.mb-4 Nuevo Cliente
 
-  form(action="/api/client", method="POST")
+  form(action="/clients", method="POST")
     .mb-3
       label.form-label(for="name") Empresa
-      input.form-control(type="text", name="name", )
+      input.form-control(type="text", name="name", required)
     .mb-3
       label.form-label(for="contact_name") Contacto
-      input.form-control(type="text", name="contact_name", )
+      input.form-control(type="text", name="contact_name", required)
     .mb-3
       label.form-label(for="email") Email
-      input.form-control(type="email", name="email", )
+      input.form-control(type="email", name="email",required)
     .mb-3
       label.form-label(for="phone") Teléfono
-      input.form-control(type="text", name="phone", )
+      input.form-control(type="text", name="phone", required)
     .mb-3
       label.form-label(for="address") Dirección
-      input.form-control(type="text", name="address", )
+      input.form-control(type="text", name="address",required)
     .mb-3
       label.form-label(for="status") Estado
       select.form-select(name="status")

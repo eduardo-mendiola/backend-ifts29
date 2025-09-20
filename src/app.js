@@ -44,7 +44,13 @@ app.get('/clients', ClientController.getAllView);
 app.get('/clients/:id', ClientController.getByIdView);
 // app.get('/clients/new', (req, res) => res.render('client-form', { title: 'Nuevo Cliente', client: {} }));
 // app.get('/clients/:id/edit', ClientController.getByIdView);
+
+
+app.get('/clients', ClientController.getAllView);
+app.get('/clients/:id', ClientController.getByIdView);
 app.get('/client-form', ClientController.newView);
+app.post('/clients', ClientController.createView);
+
 
 // User
 app.get('/users', UserController.getAllView);
