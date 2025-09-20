@@ -8,7 +8,7 @@
 **Grupo 2:**  
 - Mendiola, Eduardo E.  
 - Moreno, Miriam
-- Integrante 3  
+- Leonel Luna  
 - Integrante 4  
 - Integrante 5  
 
