@@ -25,4 +25,22 @@ router.patch('/:id', projectController.patch);
 // DELETE /api/projects/:id - Eliminar un proyecto por ID
 router.delete('/:id', projectController.delete);
 
+
+// Lista de proyectos en vista pug
+router.get('/', projectController.getAllView);
+
+// Detalle de un proyecto
+router.get('/:id', projectController.getByIdView);
+
+// Formulario para editar un proyecto
+router.get('/:id/edit', projectController.getByIdView);
+
+
+
+
+
+
+
+
+
 export default router;
