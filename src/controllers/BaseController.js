@@ -50,7 +50,7 @@ class BaseController {
     }
 
     // Para API (Postman, Thunder Client)
-create = async (req, res) => {
+    create = async (req, res) => {
         try {
             const newItem = await this.model.create(req.body);
             res.status(201).json(newItem);
