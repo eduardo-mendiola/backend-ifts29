@@ -14,7 +14,7 @@ block content
         th.text-end.pe-5 Acciones
     tbody
       each item in items
-        tr(data-id=item.id)
+        tr(data-id=item.id, data-name=`${item.first_name} ${item.last_name}`)
           td= item.id
           td= item.first_name
           td= item.last_name
