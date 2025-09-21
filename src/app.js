@@ -28,7 +28,7 @@ app.use(express.json()); // Middleware para parsear cuerpos de solicitud en form
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(join(__dirname, 'public')))
 
-// Rutas para las vistas del CRUD (HTML) - Pug
+// || Rutas para las vistas del CRUD (HTML) - Pug ||
 
 // Ruta de bienvenida 
 app.get('/', (req, res) => {
@@ -46,9 +46,6 @@ app.get('/clients/:id', ClientController.getByIdView);
 // app.get('/clients/new', (req, res) => res.render('client-form', { title: 'Nuevo Cliente', client: {} }));
 // app.get('/clients/:id/edit', ClientController.getByIdView);
 
-
-app.get('/clients', ClientController.getAllView);
-app.get('/clients/:id', ClientController.getByIdView);
 app.get('/client-form', ClientController.newView);
 app.post('/clients', ClientController.createView);
 
@@ -62,7 +59,8 @@ app.get('/projects', ProjectController.getAllView);
 app.get('/projects/:id', ProjectController.getByIdView);
 app.get('/projects/:id/edit', ProjectController.getByIdView);
 
-// Rutas base (endpoints de la API)
+
+// || Rutas base (endpoints de la API) ||
 app.use('/api/client', clientRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
