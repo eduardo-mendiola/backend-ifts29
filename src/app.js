@@ -56,6 +56,10 @@ app.post('/clients', ClientController.createView);
 
 // User
 app.get('/users', UserController.getAllView);
+app.get('/users/new', UserController.newView);
+app.post('/users', UserController.createViewAll);
+app.get('/users/:id/edit', UserController.getEditView); // Nueva ruta para mostrar formulario de edición
+app.put('/users/:id', UserController.updateView); // Nueva ruta para procesar la actualización
 app.get('/users/:id', UserController.getByIdView);
 
 // Project views Pug

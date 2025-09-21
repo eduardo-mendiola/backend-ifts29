@@ -20,17 +20,17 @@
   "users": [
     {
       "id": "1",
-      "first_name": "Ana",
+      "first_name": "Analia",
       "last_name": "Gómez",
       "email": "ana.gomez@clickwave.com",
       "password_hash": "hash123",
       "phone": "+54 11 1234 5678",
-      "role_id": 1,
-      "area_id": 1,
-      "monthly_salary": 2500,
+      "role_id": "1",
+      "area_id": "1",
+      "monthly_salary": "3000",
       "status": "active",
       "created_at": "2025-01-10",
-      "updated_at": "2025-02-01"
+      "updated_at": "2025-09-21T15:25:59.200Z"
     },
     {
       "id": "2",
@@ -87,20 +87,6 @@
       "status": "active",
       "created_at": "2025-01-25",
       "updated_at": "2025-02-10"
-    },
-    {
-      "id": "6",
-      "first_name": "Francisco",
-      "last_name": "Zabala",
-      "email": "francisco.zabala@clickwave.com",
-      "password_hash": "hash126",
-      "phone": "+54 11 8765 5698",
-      "role_id": 2,
-      "area_id": 3,
-      "monthly_salary": 1800,
-      "status": "active",
-      "created_at": "2025-09-21T13:38:36.375Z",
-      "updated_at": "2025-09-21T13:38:36.375Z"
     }
   ],
   "roles": [

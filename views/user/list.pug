@@ -1,7 +1,9 @@
 extends ../layout.pug
 
 block content
-  h1.mb-4 Lista de Usuarios del Sistema
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1.mb-0 Lista de Usuarios del Sistema
+    a.btn.btn-primary(href="/users/new") Nuevo Usuario
 
   table.table.table-hover.table-dark
     thead
@@ -12,7 +14,7 @@ block content
         th.text-end.pe-5 Acciones
     tbody
       each item in items
-        tr(data-id=item.id data-name=`${item.first_name} ${item.last_name}`)
+        tr(data-id=item.id)
           td= item.id
           td= item.first_name
           td= item.last_name

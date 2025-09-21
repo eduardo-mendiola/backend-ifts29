@@ -152,6 +152,21 @@ class BaseController {
         }
     }
 
+    // Operación CREATE genérica para cualquier entidad (POST /entidad)
+    createViewAll = async (req, res) => {
+        try {
+            // Guarda la entidad en la base de datos usando el modelo
+            const newItem = await this.model.create(req.body);
+
+            // Redirige a la lista de la entidad correspondiente después de crear
+            res.redirect(`/${this.viewPath}s`);
+        } catch (error) {
+            console.error(`Error al crear ${this.viewPath}:`, error.message);
+            // Si hay un error, renderiza una página de error
+            res.status(500).render('error500', { title: 'Error de servidor' });
+        }
+    }
+
     // Operación para mostrar el formulario de creación (GET /entidad/new)
     newView = async (req, res) => {
         try {
@@ -164,6 +179,46 @@ class BaseController {
             res.status(500).render('error500', { title: 'Error de servidor' });
         }
     }
+
+
+    // Operación para mostrar el formulario de edición (GET /entidad/:id/edit)
+    getEditView = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const item = await this.model.findById(id);
+            
+            if (!item) {
+                return res.render('error404', { title: `${this.viewPath} no encontrado.` });
+            }
+
+            res.render(`${this.viewPath}/edit`, {
+                title: `Editar ${this.viewPath}`,
+                item
+            });
+        } catch (error) {
+            console.error(`Error al obtener ${this.viewPath} para editar:`, error.message);
+            res.status(500).render('error500', { title: 'Error de servidor' });
+        }
+    }
+
+    // Operación UPDATE para vistas (PUT /entidad/:id)
+    updateView = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const updatedItem = await this.model.update(id, req.body);
+            
+            if (!updatedItem) {
+                return res.render('error404', { title: `${this.viewPath} no encontrado para actualizar.` });
+            }
+
+            // Redirige a la lista después de actualizar
+            res.redirect(`/${this.viewPath}s`);
+        } catch (error) {
+            console.error(`Error al actualizar ${this.viewPath}:`, error.message);
+            res.status(500).render('error500', { title: 'Error de servidor' });
+        }
+    }
+
 
 }
 
