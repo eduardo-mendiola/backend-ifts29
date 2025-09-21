@@ -975,11 +975,34 @@ Respuesta recibida:
 
 ---
 
+## 6. Capturas de Views
+
+En esta sección se presentan capturas de pantalla de las views desarrolladas utilizando Pug como motor de plantillas y Bootstrap para el diseño y la maquetación.
+
+### Página principal
+
+![6.1 - Página principal](./assets/screenshots/6.1-view-pug.png)
+
+### Página Usuarios del sistema
+
+![6.2 - Página Usuarios del sistema](./assets/screenshots/6.2-view-pug.png)
+
+### Eliminar a un usuario
+
+![6.3 - Eliminar a un usuario](./assets/screenshots/6.3-view-pug.png)
+
+### Crear un nuevo usuario
+
+![6.4 - Crear un nuevo usuario](./assets/screenshots/6.4-view-pug.png)
+
+### Editar un los datos de un usuario
+
+![6.5 - Editar un los datos de un usuario](./assets/screenshots/6.5-view-pug.png)
 
 
-## 6. Uso de IAs
+## 7. Uso de IAs
 
-### 6.1 Modelos  
+### 7.1 Modelos  
 
 Durante el desarrollo de este proyecto se emplearon herramientas de Inteligencia Artificial (IA) para mejorar la eficiencia en la codificación, la comprensión teórica y la elaboración de documentación. Específicamente, se utilizó el modelo **ChatGPT (GPT-5 mini, proporcionado por OpenAI)** en su versión en la nube, así como el modelo **Claude AI (Claude Opus 4.1, proporcionado por Anthropic)** en su versión en la nube.  
 
@@ -990,7 +1013,7 @@ El uso de la IA incluyó las siguientes funciones principales:
 
 ---
 
-### 6.2 Prompts  
+### 7.2 Prompts  
 
 **AI:** ChatGPT
 **Modelo:** GPT-5 Mini  
@@ -1029,7 +1052,7 @@ Asegúrate de:
 
 ---
 
-## 7. Bibliografía y Fuentes
+## 8. Bibliografía y Fuentes
 
 - IFTS Nro. 29, Tecnicatura Superior en Desarrollo de Software a Distancia, Desarrollo de Sistemas Web (Back End) - 2° (2025). [Enlace](https://aulasvirtuales.bue.edu.ar/course/view.php?id=22553)  
 - The Net Ninja. MERN Stack Crash Course Tutorial [Playlist]. YouTube. 2022. [Enlace](https://youtube.com/playlist?list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&si=TEi7PZTW6xPRlSSk)  
