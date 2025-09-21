@@ -250,16 +250,28 @@
       "manager_id": 1
     },
     {
-      "id": 5,
-      "client_id": 5,
-      "name": "Gestión de Energía",
-      "description": "Dashboard para GreenEnergy",
-      "start_date": "2025-01-10",
-      "end_date": "2025-05-30",
-      "budget": 40000,
+      "id": "5",
+      "client_id": 105,
+      "name": "Campaña Publicitaria Primavera 2025",
+      "description": "Campaña integral de marketing para productos de primavera.",
+      "start_date": "2025-04-01",
+      "end_date": "2025-06-30",
+      "budget": 18000,
+      "billing_type": "fixed",
+      "status": "planned",
+      "manager_id": 205
+    },
+    {
+      "id": "6",
+      "client_id": 105,
+      "name": "Campaña Publicitaria Invierno 2026",
+      "description": "Campaña integral de marketing para productos de invierno.",
+      "start_date": "2025-09-01",
+      "end_date": "2025-01-30",
+      "budget": 85600000,
       "billing_type": "hourly",
-      "status": "in_progress",
-      "manager_id": 4
+      "status": "planned",
+      "manager_id": 205
     }
   ],
   "tasks": [

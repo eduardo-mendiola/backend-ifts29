@@ -39,6 +39,7 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'ClickWave' });
 });
 
+
 // Client
 app.get('/clients', ClientController.getAllView);
 app.get('/clients/:id', ClientController.getByIdView);
@@ -56,16 +57,16 @@ app.post('/clients', ClientController.createView);
 app.get('/users', UserController.getAllView);
 app.get('/users/:id', UserController.getByIdView);
 
-// Project 
+// Project views Pug
 app.get('/projects', ProjectController.getAllView);
 app.get('/projects/:id', ProjectController.getByIdView);
-
+app.get('/projects/:id/edit', ProjectController.getByIdView);
 
 // Rutas base (endpoints de la API)
 app.use('/api/client', clientRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
-app.use('/api/project', projectRoutes);
+app.use('/api/projects', projectRoutes);
 
 
 // Manejo de errores 404 para rutas no encontradas

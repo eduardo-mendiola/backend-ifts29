@@ -35,6 +35,8 @@
 2. [Asignación de Roles y Responsabilidades](#2-asignación-de-roles-y-responsabilidades)  
    - [Eduardo E. Mendiola](#eduardo-e-mendiola)  
      - Rol Asignado: Arquitectura de Software y Desarrollo  
+   - [Miriam Moreno](#miriam-moreno)
+     - Rol Asignado: Backend Developer
 3. [Funcionamiento del Sistema](#3-funcionamiento-del-sistema)  
    3.1 [Funcionamiento General](#31-funcionamiento-general)  
    3.2 [Funcionalidades y Módulos Principales](#32-funcionalidades-y-módulos-principales)  
@@ -50,7 +52,8 @@
    4.5 [Variables de entorno](#45-variables-de-entorno)   
 5. [Capturas de Consultas](#5-capturas-de-consultas)  
    5.1 [Ejecución del Servidor](#51-ejecución-del-servidor)  
-   5.2 [Ejemplo de Consulta - CRUD: Cliente](#52-ejemplo-de-consulta---crud-cliente)
+   5.2 [Ejemplo de Consulta - CRUD: Cliente](#52-ejemplo-de-consulta---crud-cliente)  
+   5.3 [Ejemplo de Consulta - CRUD: Projecto](#53-ejemplo-de-consulta---crud-projecto)
 6. [Uso de IAs](#6-uso-de-ias)  
    6.1 [Modelos](#61-modelos)  
    6.2 [Prompts](#62-prompts)  
@@ -145,6 +148,47 @@ Las responsabilidades y las tareas realizadas en el proyecto abarcan todo el cic
 
 
 ---
+### **Miriam Moreno**  
+
+# Implementación de Entidad **Project**
+
+## Definición de Clase de Entidad
+Creación de la clase **`ProjectEntity`**, que modela la estructura 
+de datos y el comportamiento de los proyectos, incluyendo 
+propiedades como:  
+
+- `client_id`  
+- `name`  
+- `description`  
+- `start_date`  
+- `end_date`  
+- `budget`  
+- `billing_type`  
+- `status`  
+- `manager_id`  
+
+---
+
+## Desarrollo de Modelo Específico
+Implementación de **`ProjectModel`**, extendiendo **`BaseModel`** 
+y adaptando la lógica para:  
+
+- Gestión de **IDs**.  
+- Manejo de atributos propios de la entidad **Project**.  
+
+---
+
+## Desarrollo de Controlador Específico
+Creación de **`ProjectController`**, extendiendo 
+**`BaseController`** para manejar las operaciones **CRUD** de los 
+proyectos a través de la API:  
+
+- **POST**  
+- **GET**  
+- **PUT**  
+- **PATCH**  
+- **DELETE**  
+
 
 ## 3. Funcionamiento del Sistema
 
@@ -175,7 +219,7 @@ El punto de entrada de la aplicación es **server.js**. Este archivo es responsa
 #### Servidor Express (app.js)
 - Es la aplicación principal de Express, importada por `server.js`.  
 - Configura middlewares globales, como `express.json()`, para parsear cuerpos de solicitud JSON.  
-- Monta las rutas específicas de cada entidad (clientes, usuarios, roles) bajo sus respectivos prefijos (`/api/clientRoutes`, `/api/users`, `/api/roles`).  
+- Monta las rutas específicas de cada entidad (clientes, usuarios, roles, Projectos) bajo sus respectivos prefijos (`/api/clientRoutes`, `/api/users`, `/api/roles`).  
 - Define una ruta de bienvenida y un manejador de errores 404 para rutas no encontradas.  
 
 #### Base de Datos JSON (JsonDatabase.js, db.js)
@@ -187,7 +231,7 @@ El punto de entrada de la aplicación es **server.js**. Este archivo es responsa
 - Se encarga de crear IDs secuenciales únicos para cada nueva entrada en una colección específica, basándose en el último ID existente en esa colección.  
 
 #### Entidades (Entity.js)
-- Definen la estructura y los atributos de los objetos de negocio (e.g., `ClientEntity`, `RoleEntity`, `UserEntity`).  
+- Definen la estructura y los atributos de los objetos de negocio (e.g., `ClientEntity`, `RoleEntity`, `UserEntity`, `ProjectEntity`).  
 - Pueden incluir métodos específicos de negocio (e.g., `getFullName()` en `ClientEntity` y `UserEntity`, `getDisplayName()` en `RoleEntity`).  
 
 #### Modelos (Model.js, BaseModel.js)
@@ -640,6 +684,287 @@ Respuesta recibida:
 ![5.2.6 - Eliminar cliente](./assets/screenshots/5.2.6-delete-client.png)
 
 ---
+
+### 5.3 Ejemplo de Consulta - CRUD: Project
+
+#### 1\. Crear un proyecto (`POST /api/projects`)
+
+Solicitud enviada:
+
+  - **URL**: `http://localhost:4000/api/projects`
+  - **Método**: `POST`
+  - **Cuerpo (JSON)**:
+
+```json
+{
+   "client_id": 105,
+   "name": "Campaña Publicitaria Primavera 2025",
+   "description": "Campaña integral de marketing para productos de primavera.",
+   "start_date": "2025-04-01",
+   "end_date": "2025-06-30",
+   "budget": 18000,
+   "billing_type": "fixed",
+   "status": "planned",
+   "manager_id": 205
+}
+```
+
+Respuesta recibida:
+
+  - **Código HTTP**: `201`
+  - **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+   "id": "6",
+   "client_id": 105,
+   "name": "Campaña Publicitaria Primavera 2025",
+   "description": "Campaña integral de marketing para productos de primavera.",
+   "start_date": "2025-04-01",
+   "end_date": "2025-06-30",
+   "budget": 18000,
+   "billing_type": "fixed",
+   "status": "planned",
+   "manager_id": 205
+}
+```
+
+![5.3.1 - Crear proyecto](./assets/screenshots/5.3.1-post-proyect.png)
+
+-----
+#### 2\. Obtener todos los proyectos (`GET /api/projects`)
+
+**Solicitud enviada:**
+
+- **URL**: `http://localhost:4000/api/projects`
+- **Método**: `GET`
+- **Cuerpo de la solicitud**: No aplica (`GET` no envía cuerpo)
+
+**Respuesta recibida:**
+
+- **Código HTTP**: `200`
+- **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+[
+    {
+    "id": 1,
+    "client_id": 1,
+    "name": "Plataforma de Gestión",
+    "description": "Sistema integral para TechCorp",
+    "start_date": "2025-02-01",
+    "end_date": "2025-06-30",
+    "budget": 50000,
+    "billing_type": "fixed",
+    "status": "in_progress",
+    "manager_id": 2
+  },
+  {
+    "id": 2,
+    "client_id": 2,
+    "name": "App Móvil de Ventas",
+    "description": "Aplicación de ventas para InnovaSoft",
+    "start_date": "2025-01-15",
+    "end_date": "2025-04-15",
+    "budget": 30000,
+    "billing_type": "hourly",
+    "status": "in_progress",
+    "manager_id": 4
+  },
+  {
+    "id": 3,
+    "client_id": 3,
+    "name": "Portal de Salud",
+    "description": "Portal de pacientes para HealthPlus",
+    "start_date": "2025-03-01",
+    "end_date": "2025-07-30",
+    "budget": 45000,
+    "billing_type": "fixed",
+    "status": "planned",
+    "manager_id": 2
+  },
+  {
+    "id": 4,
+    "client_id": 4,
+    "name": "E-learning Platform",
+    "description": "Plataforma de cursos en línea",
+    "start_date": "2025-02-20",
+    "end_date": "2025-08-20",
+    "budget": 60000,
+    "billing_type": "fixed",
+    "status": "in_progress",
+    "manager_id": 1
+  },
+  {
+    "id": "5",
+    "client_id": 105,
+    "name": "Campaña Publicitaria Primavera 2025",
+    "description": "Campaña integral de marketing para productos de primavera.",
+    "start_date": "2025-04-01",
+    "end_date": "2025-06-30",
+    "budget": 18000,
+    "billing_type": "fixed",
+    "status": "planned",
+    "manager_id": 205
+  }
+   {
+      "id": "6",
+      "client_id": 105,
+      "name": "Campaña Publicitaria Primavera 2025",
+      "description": "Campaña integral de marketing para productos de primavera.",
+      "start_date": "2025-04-01",
+      "end_date": "2025-06-30",
+      "budget": 18000,
+      "billing_type": "fixed",
+      "status": "planned",
+      "manager_id": 205
+   }
+]
+
+```
+![5.3.2 - Obtener todos los projectos](./assets/screenshots/5.3.2-get-projects.png)
+-----
+
+#### 3\. Obtener un proyecto por ID (`GET /api/projects/:id`)
+
+**Solicitud enviada:**
+
+- **URL**: `http://localhost:4000/api/projects/6`
+- **Método**: `GET`
+- **Cuerpo de la solicitud**: No aplica (`GET` no envía cuerpo)
+
+**Respuesta recibida:**
+
+- **Código HTTP**: `200`
+- **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+   "id": "6",
+   "client_id": 105,
+   "name": "Campaña Publicitaria Primavera 2025",
+   "description": "Campaña integral de marketing para productos de primavera.",
+   "start_date": "2025-04-01",
+   "end_date": "2025-06-30",
+   "budget": 18000,
+   "billing_type": "fixed",
+   "status": "planned",
+   "manager_id": 205
+}
+
+```
+### 4. Actualizar un proyecto por ID (PUT /api/projects/:id)
+
+**Solicitud enviada:**
+
+- **URL:** `http://localhost:4000/api/projects/6`  
+- **Método:** `PUT`  
+- **Cuerpo (JSON):**
+
+```json
+{ 
+    "client_id": 105,
+    "name": "Campaña Publicitaria Invierno 2026",
+    "description": "Campaña integral de marketing para productos de invierno.",
+    "start_date": "2025-09-01",
+    "end_date": "2025-01-30",
+    "budget": 19800000,
+    "billing_type": "fixed",
+    "status": "planned",
+    "manager_id": 205
+  }
+
+```
+**Respuesta recibida:**
+
+- **Código HTTP**: `200`
+- **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+  "id": "6",
+  "client_id": 105,
+  "name": "Campaña Publicitaria Invierno 2026",
+  "description": "Campaña integral de marketing para productos de invierno.",
+  "start_date": "2025-09-01",
+  "end_date": "2025-01-30",
+  "budget": 19800000,
+  "billing_type": "fixed",
+  "status": "planned",
+  "manager_id": 205
+}
+
+```
+
+![5.3.4 - Actualizar projecto (PUT)](./assets/screenshots/5.3.4-put-project.png)
+-----
+
+## 5. Actualizar campos específicos de un proyecto (PATCH /api/projects/:id)
+
+**Solicitud enviada:**
+
+- **URL:** `http://localhost:4000/api/projects/6`  
+- **Método:** `PATCH`  
+- **Cuerpo (JSON):**
+
+<!-- end list -->
+
+```json
+{
+  "budget": 85600000,
+  "billing_type": "hourly"
+}     
+```
+**Respuesta recibida:**
+
+- **Código HTTP**: `200`
+- **Cuerpo JSON**:
+
+<!-- end list -->
+
+```json
+{
+  "id": "6",
+  "client_id": 105,
+  "name": "Campaña Publicitaria Invierno 2026",
+  "description": "Campaña integral de marketing para productos de invierno.",
+  "start_date": "2025-09-01",
+  "end_date": "2025-01-30",
+  "budget": 85600000,
+  "billing_type": "hourly",
+  "status": "planned",
+  "manager_id": 205
+}
+```
+![5.3.5 - Actualizar projecto (PATCH)](./assets/screenshots/5.3.5-patch-project.png)
+
+-----
+
+## 6. Eliminar un proyecto por ID (DELETE /api/projects/:id)
+
+**Solicitud enviada:**
+
+- **URL:** `http://localhost:4000/api/projects/6`  
+- **Método:** `DELETE`  
+- **Cuerpo de la solicitud:** No aplica (DELETE no envía cuerpo)  
+
+**Respuesta recibida:**
+
+- **Código HTTP:** `204 (No Content)`  
+
+![5.3.6 - Eliminar projecto](./assets/screenshots/5.3.6-delete-project.png)
+
+---
+
+
 
 ## 6. Uso de IAs
 
