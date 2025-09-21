@@ -20,7 +20,7 @@
   "users": [
     {
       "id": "1",
-      "first_name": "Analia",
+      "first_name": "Ana",
       "last_name": "Gómez",
       "email": "ana.gomez@clickwave.com",
       "password_hash": "hash123",
@@ -30,7 +30,7 @@
       "monthly_salary": "3000",
       "status": "active",
       "created_at": "2025-01-10",
-      "updated_at": "2025-09-21T15:25:59.200Z"
+      "updated_at": "2025-09-21T15:53:05.873Z"
     },
     {
       "id": "2",

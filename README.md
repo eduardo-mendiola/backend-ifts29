@@ -134,15 +134,26 @@ Las responsabilidades y las tareas realizadas en el proyecto abarcan todo el cic
 
 ### User Interface / Views:
 - **Creación de Plantillas Pug y Lógica de Vistas:** Desarrollo de las vistas de la aplicación utilizando Pug como motor de plantillas, incluyendo la página de inicio (layout.pug e index.pug), plantillas de manejo de errores (error500.pug y error404.pug), y las vistas específicas para clientes (list.pug, details.pug) y para usuarios (list.pug y details.pug).  
+- **Vistas entidades:**
+clients (list.pug, details.pug),
+users (list.pug, details.pug, form.pug, edit.pug).
 - **Implementación de lógica** en los controladores para renderizar estas vistas con los datos provenientes de los modelos, manteniendo los métodos genéricos de BaseController y adaptándolos para permitir la renderización dinámica de cualquier entidad. Se aplicó Bootstrap con tema oscuro y estilos para botones, tablas y navegación.
+- **Implementación** de lógica para **eliminar** y **actualizar**.
 
 ### Actualizaciones y refactorización de código: 
 - **Refactorización completa del proyecto** para utilizar `ECMAScript Modules (ESM)`, reemplazando require y module.exports por import y export. Se actualizaron todos los modelos, controladores, entidades y rutas. 
 - **Se implementó fieldsOrder en BaseModel** y en los modelos de User, Client y Role para asegurar un orden consistente de propiedades en las respuestas JSON en operaciones de create, update y patch. Se mantuvo toda la lógica existente y se aplicaron buenas prácticas de legibilidad y mantenimiento de código.
 
+### Owner y Maintainer del repositorio GitHub: 
+- **Creación del Repositorio en GitHub:** Gestión de la inicialización y configuración del repositorio de control de versiones en GitHub para el proyecto, facilitando la colaboración y el seguimiento de los cambios. 
+- **Responsable del mantenimiento del repositorio en GitHub**, me encargué de administrar las **pull requests** enviadas por los colaboradores. 
+- **Revisar el código propuesto**, verificar que cumpliera con los estándares del proyecto, dar retroalimentación cuando fue necesario
+- **Aprobar o rechazar cambios** y finalmente **integrarlos** al repositorio principal.
+
 ### Control de Versiones y Documentación
 - **Creación del Repositorio en GitHub:** Gestión de la inicialización y configuración del repositorio de control de versiones en GitHub para el proyecto, facilitando la colaboración y el seguimiento de los cambios.  
 - **Capturas de consultas:** capturas de pantalla de las peticiones realizadas con la herramienta Postman en Visual Studio Code, a la API RESTful para demostrar su funcionamiento y validar las operaciones CRUD.
+- **Capturas de pantallas:** capturas de pantalla realizadas con plantillas pug y bootstrap.
 - **Generación de la documentación:** Elaboración de un documento en Google Docs como base principal de la documentación del proyecto, adaptado a los requisitos de entrega del trabajo práctico y posteriormente exportado en formato PDF. Este documento incluye la asignación de roles, las fuentes consultadas y el enlace al video explicativo del proyecto.  
 - **Creación del archivo README:** Adaptación del contenido del documento principal al archivo `README.md`, que funcionará como documentación de referencia dentro del repositorio. Este archivo resume la información esencial sobre el funcionamiento, instalación y uso de la aplicación.
 
