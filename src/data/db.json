@@ -91,16 +91,16 @@
     {
       "id": "6",
       "first_name": "Francisco",
-      "last_name": "Gimenez",
-      "email": "francisco.gimenez@clickwave.com",
+      "last_name": "Zabala",
+      "email": "francisco.zabala@clickwave.com",
       "password_hash": "hash126",
       "phone": "+54 11 8765 5698",
-      "role_id": 3,
-      "area_id": 1,
+      "role_id": 2,
+      "area_id": 3,
       "monthly_salary": 1800,
       "status": "active",
-      "created_at": "2025-09-19T00:23:26.829Z",
-      "updated_at": "2025-09-19T00:23:37.347Z"
+      "created_at": "2025-09-21T13:38:36.375Z",
+      "updated_at": "2025-09-21T13:38:36.375Z"
     }
   ],
   "roles": [
@@ -179,15 +179,6 @@
       "email": "pablo@greenenergy.com",
       "phone": "+49 30 1122 3344",
       "address": "Berlín, Alemania",
-      "status": "active"
-    },
-    {
-      "id": "6",
-      "name": "IngeMar",
-      "contact_name": "Martina Gonzales",
-      "email": "martinagonzales@ingemar.com",
-      "phone": "+54 9 223 636 588",
-      "address": "Mar del Plata, Argentina",
       "status": "active"
     },
     {

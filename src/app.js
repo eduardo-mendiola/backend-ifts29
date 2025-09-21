@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js';
 import roleRoutes from './routes/roleRoutes.js';
 import ProjectController from './controllers/ProjectController.js';
 import projectRoutes from './routes/projectRoutes.js';
+import methodOverride from 'method-override';
 
 
 // __dirname en ESM
@@ -22,11 +23,14 @@ const app = express();
 app.set('views', join(__dirname,'..', 'views'));
 app.set('view engine', 'pug')
 
-// Middlewares
+// || Middlewares ||
 app.use(express.json()); // Middleware para parsear cuerpos de solicitud en formato JSON
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(join(__dirname, 'public')))
+
+// Middleware para soportar otros métodos HTTP como DELETE y PUT
+app.use(methodOverride('_method'));
 
 // || Rutas para las vistas del CRUD (HTML) - Pug ||
 
