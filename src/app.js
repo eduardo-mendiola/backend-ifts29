@@ -64,8 +64,12 @@ app.get('/users/:id', UserController.getByIdView);
 
 // Project views Pug
 app.get('/projects', ProjectController.getAllView);
-app.get('/projects/:id', ProjectController.getByIdView);
+app.get('/projects/new', ProjectController.newView);
 app.get('/projects/:id/edit', ProjectController.getByIdView);
+app.get('/projects/:id', ProjectController.getByIdView);
+app.post('/projects', ProjectController.createViewAll);
+app.put('/projects/:id', ProjectController.updateView);
+
 
 
 // || Rutas base (endpoints de la API) ||

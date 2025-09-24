@@ -110,7 +110,7 @@ class BaseController {
         }
     }
 
-    getByIdView = async (req, res) => {
+    xgetByIdView = async (req, res) => {
         try {
             const { id } = req.params;
             const item = await this.model.findById(id);
@@ -136,6 +136,60 @@ class BaseController {
             res.render('error500', { tittle: 'Error de servidor' });
         }
     }
+
+getByIdView = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const item = await this.model.findById(id);
+        if (!item) return res.render('error404', { title: `${this.viewPath} no encontrado.` });
+
+        if (req.originalUrl.includes('/edit')) {
+            // Si el controlador hijo tiene editView, lo llama
+            if (this.editView) return this.editView(req, res);
+
+            // Form genérico para cualquier otra entidad
+            res.render(`${this.viewPath}/form`, {
+                title: `Editar ${this.viewPath}`,
+                item
+            });
+        } else {
+            res.render(`${this.viewPath}/details`, {
+                title: `Detalles del ${this.viewPath}`,
+                item
+            });
+        }
+    } catch (error) {
+        console.error(`Error al obtener por ID (${this.viewPath}):`, error.message);
+        res.status(500).render('error500', { title: 'Error de servidor' });
+    }
+}
+
+// newView genérico
+newView = async (req, res) => {
+    try {
+        // Si el controlador hijo sobrescribe newView, se llamará allí
+        res.render(`${this.viewPath}/form`, {
+            title: `Nuevo ${this.viewPath}`,
+            item: {}
+        });
+    } catch (error) {
+        console.error(`Error al abrir formulario (${this.viewPath}):`, error.message);
+        res.status(500).render('error500', { title: 'Error de servidor' });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Operación CREATE (POST /entidad)
     createView = async (req, res) => {

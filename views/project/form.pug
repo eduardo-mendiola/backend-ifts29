@@ -1,50 +1,90 @@
 extends ../layout.pug
 
 block content
-  h1.mb-4= title
+  .d-flex.justify-content-between.align-items-center.mb-4 
+  
+    h1.mb-0 #{item && item.id ? 'Editar Proyecto' : 'Crear Nuevo Proyecto'} 
 
-  form(method="POST", action=item ? `/api/projects/${item.id}?_method=PUT` : "/api/projects")
+    - const isEdit = item && item.id
+  form(method="POST", action=isEdit ? `/api/projects/${item.id}?_method=PUT` : "/api/projects")
+
+
+  
+    
+    // Nombre del proyecto
     .mb-3
       label.form-label(for="name") Nombre del proyecto
       input.form-control(type="text", id="name", name="name", required, value=item ? item.name : "")
 
+    // Cliente
     .mb-3
       label.form-label(for="client_id") Cliente
-      input.form-control(type="number", id="client_id", name="client_id", required, value=item ? item.client_id : "")
+      select.form-select(id="client_id", name="client_id", required)
+        option(value="") -- Seleccione un cliente --
+        each client in clients
+          option(value=client.id, selected=item && item.client_id == client.id)= client.name
+        if clients.length == 0
+          option(disabled) No hay clientes disponibles
 
+    // Descripción
     .mb-3
       label.form-label(for="description") Descripción
       textarea.form-control(id="description", name="description")= item ? item.description : ""
 
+    // Fecha de inicio
     .mb-3
       label.form-label(for="start_date") Fecha de inicio
       input.form-control(type="date", id="start_date", name="start_date", required, value=item ? item.start_date : "")
 
+    // Fecha de fin
     .mb-3
       label.form-label(for="end_date") Fecha de fin
       input.form-control(type="date", id="end_date", name="end_date", value=item ? item.end_date : "")
 
+    // Presupuesto
     .mb-3
       label.form-label(for="budget") Presupuesto
       input.form-control(type="number", id="budget", name="budget", step="0.01", value=item ? item.budget : "")
 
+    // Tipo de facturación
     .mb-3
       label.form-label(for="billing_type") Tipo de facturación
       select.form-select(id="billing_type", name="billing_type")
-        option(value="Mensual", selected=item && item.billing_type === 'Mensual') Mensual
-        option(value="Anual", selected=item && item.billing_type === 'Anual') Anual
-        option(value="Única", selected=item && item.billing_type === 'Única') Única
+        option(value="fixed", selected=item && item.billing_type === 'fixed') Mensual
+        option(value="hourly", selected=item && item.billing_type === 'hourly') Anual
+        option(value="retainer", selected=item && item.billing_type === 'retainer') Única
 
+      //- select.form-select(id="billing_type", name="billing_type")
+        //- option(value="Mensual", selected=item && item.billing_type === 'Mensual') Mensual
+        //- option(value="Anual", selected=item && item.billing_type === 'Anual') Anual
+        //- option(value="Única", selected=item && item.billing_type === 'Única') Única
+
+    // Estado
     .mb-3
       label.form-label(for="status") Estado
       select.form-select(id="status", name="status")
-        option(value="Activo", selected=item && item.status === 'Activo') Activo
-        option(value="En Progreso", selected=item && item.status === 'En Progreso') En Progreso
-        option(value="Finalizado", selected=item && item.status === 'Finalizado') Finalizado
+        option(value="planned", selected=item && item.status === 'planned') Activo
+        option(value="in_progress", selected=item && item.status === 'in_progress') En Progreso
+        option(value="completed", selected=item && item.status === 'completed') Finalizado
+        option(value="on_hold", selected=item && item.status === 'on_hold') En Espera
+        option(value="cancelled", selected=item && item.status === 'cancelled') Cancelado
 
+      //- select.form-select(id="status", name="status")
+        //- option(value="Activo", selected=item && item.status === 'Activo') Activo
+        //- option(value="En Progreso", selected=item && item.status === 'En Progreso') En Progreso
+        //- option(value="Finalizado", selected=item && item.status === 'Finalizado') Finalizado
+
+    // Manager
     .mb-3
       label.form-label(for="manager_id") Manager
-      input.form-control(type="number", id="manager_id", name="manager_id", value=item ? item.manager_id : "")
+      select.form-select(id="manager_id", name="manager_id")
+        option(value="") -- Seleccione un manager --
+        each manager in managers
+          - var fullName = manager.first_name + ' ' + manager.last_name
+          option(value=manager.id, selected=item && item.manager_id == manager.id)= fullName
+        if managers.length == 0
+          option(disabled) No hay managers disponibles
 
-    button.btn.btn-primary(type="submit" disabled) Guardar
+    // Botones
+    button.btn.btn-primary(type="submit") Guardar
     a.btn.btn-secondary(href="/projects") Cancelar
