@@ -1,28 +1,98 @@
 extends ../layout.pug
 
 block content
-  .d-flex.justify-content-between.align-items-center.mb-4    
-    h1.mb-4 Lista de Proyectos
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1.mb-0 Lista de Proyectos
     a.btn.btn-gray.btn-sm.me-2(href="/projects/new") Nuevo Proyecto
+
   table.table.table-hover.table-dark
     thead
       tr
-        th ID        
+        th ID
         th Proyecto
         th Estado
         th Presupuesto
         th.text-end.pe-5 Acciones
     tbody
       each item in items
-        tr
+        tr(data-id=item.id, data-name=item.name)
           td= item.id
-          td.d-none = item.client_id
           td= item.name
           td= item.status
           td $#{item.budget}
           td.text-end
             a.btn.btn-gray.btn-sm.me-2(href=`/projects/${item.id}`) Ver
             a.btn.btn-gray.btn-sm.me-2(href=`/projects/${item.id}/edit`) Editar
-            form(action=`/api/projects/${item.id}?_method=DELETE`, method="POST", style="display:inline;")
-              input(type="hidden", name="_method", value="DELETE")
-              button.btn.btn-danger-soft.btn-sm(type="submit") Eliminar
+            button.btn.btn-danger-soft.btn-sm.delete-btn(data-id=item.id, data-name=item.name) Eliminar
+
+  // Modal de confirmación
+  div#confirmModal.modal.fade(tabindex="-1", aria-labelledby="confirmModalLabel", aria-hidden="true")
+    div.modal-dialog.modal-dialog-centered
+      div.modal-content.bg-dark.text-white
+        div.modal-header
+          h5#confirmModalLabel.modal-title.text-danger Confirmación de eliminación
+          button.btn-close.btn-close-white(type="button", data-bs-dismiss="modal", aria-label="Close")
+        div.modal-body
+          p ¿Está seguro de que desea eliminar este proyecto?
+          p#projectNameToDelete.font-weight-bold.mt-3
+        div.modal-footer
+          button#confirmYes.btn.btn-danger Eliminar
+          button.btn.btn-secondary(data-bs-dismiss="modal") Cancelar
+
+  // Toast de notificación
+  div#toastContainer.position-fixed.top-0.end-0.p-3(style="z-index: 1055;")
+    div#deleteToast.toast.fade(role="alert", aria-live="assertive", aria-atomic="true")
+      div.toast-header.bg-success.text-white
+        strong.me-auto Proyecto
+        small 
+        button.btn-close.btn-close-white.ms-2(type="button", data-bs-dismiss="toast", aria-label="Close")
+      div.toast-body.text-white.bg-success
+        Proyecto Eliminado con éxito.
+
+  script.
+    document.addEventListener('DOMContentLoaded', () => {
+      const deleteButtons = document.querySelectorAll('.delete-btn');
+      const modalElement = document.getElementById('confirmModal');
+      const modal = new bootstrap.Modal(modalElement);
+      const confirmYes = document.getElementById('confirmYes');
+      const projectNameToDelete = document.getElementById('projectNameToDelete');
+
+      const toastElement = document.getElementById('deleteToast');
+      const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+
+      let projectIdToDelete = null;
+      let rowToDelete = null;
+
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const row = event.target.closest('tr');
+        projectIdToDelete = event.target.dataset.id;
+        rowToDelete = row;
+        const projectName = row.dataset.name;
+        projectNameToDelete.textContent = `Nombre: ${projectName}`;
+        modal.show();
+      });
+    });
+
+    confirmYes.addEventListener('click', async () => {
+      if (projectIdToDelete) {
+        try {
+          const response = await fetch(`/api/projects/${projectIdToDelete}`, {
+            method: 'DELETE',
+          });
+
+          if (response.ok) {
+            rowToDelete.remove();
+            toast.show();
+          } else {
+            alert('Error al eliminar el proyecto.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Error al eliminar el proyecto.');
+        }
+      }
+      modal.hide();
+    });
+    });

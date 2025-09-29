@@ -35,7 +35,11 @@ router.get('/:id', projectController.getByIdView);
 // Formulario para editar un proyecto
 router.get('/:id/edit', projectController.getByIdView);
 
+// Mostrar formulario de nuevo proyecto
+router.get('/projects/new', projectController.newView);
 
+// Guardar proyecto desde formulario y redirigir
+router.post('/projects', projectController.createViewAll);
 
 
 

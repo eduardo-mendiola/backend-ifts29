@@ -6,7 +6,7 @@ block content
     h1.mb-0 #{item && item.id ? 'Editar Proyecto' : 'Crear Nuevo Proyecto'} 
 
     - const isEdit = item && item.id
-  form(method="POST", action=isEdit ? `/api/projects/${item.id}?_method=PUT` : "/api/projects")
+  form(method="POST", action=isEdit ? `/projects/${item.id}?_method=PUT` : "/projects")
 
 
   
@@ -86,5 +86,7 @@ block content
           option(disabled) No hay managers disponibles
 
     // Botones
-    button.btn.btn-primary(type="submit") Guardar
-    a.btn.btn-secondary(href="/projects") Cancelar
+   //- button.btn.btn-primary(type="submit") Guardar
+   button.btn.btn-primary(type="submit") #{item && item.id ? 'Actualizar Usuario' : 'Crear Usuario'}
+
+  a.btn.btn-secondary(href="/projects") Cancelar

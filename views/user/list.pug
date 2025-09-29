@@ -38,6 +38,16 @@ block content
         div.modal-footer
           button#confirmYes.btn.btn-danger Eliminar
           button.btn.btn-secondary(data-bs-dismiss="modal") Cancelar
+  // Toast de notificación
+  div#toastContainer.position-fixed.top-0.end-0.p-3(style="z-index: 1055;")
+    div#deleteToast.toast(role="alert", aria-live="assertive", aria-atomic="true")
+      div.toast-header.bg-success.text-white
+        strong.me-auto Éxito
+        small Ahora
+        button.btn-close.btn-close-white.ms-2(type="button", data-bs-dismiss="toast", aria-label="Close")
+      div.toast-body
+        Proyecto eliminado correctamente.
+
 
   script.
       document.addEventListener('DOMContentLoaded', () => {
